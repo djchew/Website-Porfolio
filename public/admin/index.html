@@ -4,13 +4,92 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Editor – Darrell Chew</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0b2d45;
+    }
+
+    /* ── Font inheritance ── */
+    #nc-root,
+    #nc-root * {
+      font-family: 'Inter', -apple-system, sans-serif !important;
+    }
+
+    /* ── Top header bar ── */
+    header {
+      background: #0d3352 !important;
+      border-bottom: 1px solid rgba(30, 95, 142, 0.5) !important;
+    }
+
+    /* ── Form field inputs ── */
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="number"],
+    textarea,
+    select {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.875rem !important;
+      border-radius: 6px !important;
+      transition: border-color 0.15s, box-shadow 0.15s !important;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #1e5f8e !important;
+      box-shadow: 0 0 0 3px rgba(30, 95, 142, 0.18) !important;
+      outline: none !important;
+    }
+
+    /* ── Buttons ── */
+    button {
+      font-family: 'Inter', sans-serif !important;
+      border-radius: 6px !important;
+      letter-spacing: 0.01em !important;
+      transition: background 0.15s, opacity 0.15s !important;
+      cursor: pointer !important;
+    }
+
+    /* ── Custom scrollbars ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.08); }
+    ::-webkit-scrollbar-thumb { background: #1e5f8e; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2a7ab8; }
+
+    /* ── Selection highlight ── */
+    ::selection { background: rgba(30, 95, 142, 0.25); }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     var h = window.h;
 
-    var styles = {
+    /* ─────────────────────────────────────────
+       Preview pane stylesheet
+    ───────────────────────────────────────── */
+    CMS.registerPreviewStyle(
+      "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');" +
+      "*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }" +
+      "body { font-family: 'Inter', -apple-system, sans-serif; background: #f5f3ee; color: #1a1a1a; font-size: 14px; line-height: 1.6; }",
+      { raw: true }
+    );
+
+    /* ─────────────────────────────────────────
+       Inline styles for the preview component
+    ───────────────────────────────────────── */
+    var s = {
       wrap: {
         fontFamily: "'Inter', -apple-system, sans-serif",
         background: '#f5f3ee',
@@ -20,242 +99,184 @@
         fontSize: '14px',
         lineHeight: '1.6'
       },
-      name: {
-        fontSize: '1.6rem',
-        fontWeight: '700',
-        marginBottom: '0.2rem'
-      },
-      title: {
-        fontSize: '0.9rem',
-        color: '#555',
-        marginBottom: '0.2rem'
-      },
-      location: {
-        fontSize: '0.8rem',
-        color: '#999',
-        marginBottom: '1rem'
-      },
-      links: {
+      avatar: {
+        width: '76px',
+        height: '76px',
+        borderRadius: '50%',
+        background: '#1e5f8e',
+        color: '#fff',
         display: 'flex',
-        gap: '0.5rem',
-        marginBottom: '1.5rem',
-        flexWrap: 'wrap'
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        letterSpacing: '0.02em',
+        marginBottom: '1rem',
+        objectFit: 'cover'
       },
+      avatarImg: {
+        width: '76px',
+        height: '76px',
+        borderRadius: '50%',
+        objectFit: 'cover',
+        marginBottom: '1rem',
+        display: 'block'
+      },
+      name: { fontSize: '1.6rem', fontWeight: '700', marginBottom: '0.2rem' },
+      jobTitle: { fontSize: '0.9rem', color: '#555', marginBottom: '0.2rem' },
+      location: { fontSize: '0.8rem', color: '#999', marginBottom: '1rem' },
+      links: { display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' },
       link: {
-        fontSize: '0.72rem',
-        fontWeight: '500',
+        fontSize: '0.72rem', fontWeight: '500',
         padding: '0.25rem 0.6rem',
-        border: '1px solid #b8d4e8',
-        borderRadius: '999px',
-        background: '#f0f7fd',
-        color: '#1e5f8e',
-        textDecoration: 'none'
+        border: '1px solid #b8d4e8', borderRadius: '999px',
+        background: '#f0f7fd', color: '#1e5f8e', textDecoration: 'none'
       },
       sectionTitle: {
-        fontSize: '0.62rem',
-        fontWeight: '600',
-        letterSpacing: '0.13em',
-        textTransform: 'uppercase',
-        color: '#999',
-        borderBottom: '1px solid #dbd8cf',
-        paddingBottom: '0.4rem',
-        marginBottom: '1rem',
-        marginTop: '1.75rem'
+        fontSize: '0.62rem', fontWeight: '600',
+        letterSpacing: '0.13em', textTransform: 'uppercase',
+        color: '#999', borderBottom: '1px solid #dbd8cf',
+        paddingBottom: '0.4rem', marginBottom: '1rem', marginTop: '1.75rem'
       },
-      summary: {
-        fontSize: '0.82rem',
-        color: '#444',
-        lineHeight: '1.7',
-        marginBottom: '0.5rem'
-      },
-      expItem: {
-        marginBottom: '1.25rem',
-        paddingBottom: '1.25rem',
-        borderBottom: '1px solid #ebe8df'
-      },
-      expHeader: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        gap: '1rem',
-        marginBottom: '0.1rem'
-      },
-      expTitle: {
-        fontSize: '0.9rem',
-        fontWeight: '600'
-      },
+      summary: { fontSize: '0.82rem', color: '#444', lineHeight: '1.7', marginBottom: '0.5rem' },
+      expItem: { marginBottom: '1.25rem', paddingBottom: '1.25rem', borderBottom: '1px solid #ebe8df' },
+      expHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.1rem' },
+      expTitle: { fontSize: '0.9rem', fontWeight: '600' },
       expDate: {
-        fontSize: '0.72rem',
-        color: '#888',
-        background: '#e5e3dc',
-        padding: '0.15rem 0.5rem',
-        borderRadius: '999px',
-        whiteSpace: 'nowrap',
-        flexShrink: '0'
+        fontSize: '0.72rem', color: '#888',
+        background: '#e5e3dc', padding: '0.15rem 0.5rem',
+        borderRadius: '999px', whiteSpace: 'nowrap', flexShrink: '0'
       },
-      expCompany: {
-        fontSize: '0.8rem',
-        fontWeight: '500',
-        color: '#1e5f8e',
-        marginBottom: '0.1rem'
-      },
-      expClient: {
-        fontSize: '0.75rem',
-        color: '#999',
-        marginBottom: '0.5rem'
-      },
-      bullet: {
-        fontSize: '0.8rem',
-        color: '#444',
-        paddingLeft: '1rem',
-        position: 'relative',
-        marginBottom: '0.25rem'
-      },
+      expCompany: { fontSize: '0.8rem', fontWeight: '500', color: '#1e5f8e', marginBottom: '0.1rem' },
+      expClient: { fontSize: '0.75rem', color: '#999', marginBottom: '0.5rem' },
+      bullet: { fontSize: '0.8rem', color: '#444', paddingLeft: '1rem', position: 'relative', marginBottom: '0.25rem' },
       tag: {
-        fontSize: '0.68rem',
-        fontWeight: '500',
-        padding: '0.18rem 0.5rem',
-        borderRadius: '999px',
-        background: '#dbeafe',
-        color: '#1e40af',
-        display: 'inline-block',
-        marginRight: '0.3rem',
-        marginBottom: '0.3rem'
+        fontSize: '0.68rem', fontWeight: '500',
+        padding: '0.18rem 0.5rem', borderRadius: '999px',
+        background: '#dbeafe', color: '#1e40af',
+        display: 'inline-block', marginRight: '0.3rem', marginBottom: '0.3rem'
       },
-      twoCol: {
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '2rem'
-      },
+      twoCol: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' },
       certItem: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        padding: '0.5rem 0',
-        borderBottom: '1px solid #ebe8df'
+        display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+        padding: '0.5rem 0', borderBottom: '1px solid #ebe8df'
       },
-      certName: {
-        fontSize: '0.82rem',
-        fontWeight: '500'
-      },
+      certName: { fontSize: '0.82rem', fontWeight: '500' },
       certDate: {
-        fontSize: '0.72rem',
-        color: '#888',
-        background: '#e5e3dc',
-        padding: '0.15rem 0.5rem',
-        borderRadius: '999px',
-        whiteSpace: 'nowrap'
+        fontSize: '0.72rem', color: '#888',
+        background: '#e5e3dc', padding: '0.15rem 0.5rem',
+        borderRadius: '999px', whiteSpace: 'nowrap'
       },
       langItem: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '0.35rem 0',
-        borderBottom: '1px solid #ebe8df',
-        fontSize: '0.82rem'
+        display: 'flex', justifyContent: 'space-between',
+        padding: '0.35rem 0', borderBottom: '1px solid #ebe8df', fontSize: '0.82rem'
       },
       langLevel: {
-        fontSize: '0.72rem',
-        color: '#888',
-        background: '#e5e3dc',
-        padding: '0.15rem 0.5rem',
-        borderRadius: '999px'
+        fontSize: '0.72rem', color: '#888',
+        background: '#e5e3dc', padding: '0.15rem 0.5rem', borderRadius: '999px'
       },
-      volRole: {
-        fontSize: '0.875rem',
-        fontWeight: '600'
-      },
-      volOrg: {
-        fontSize: '0.78rem',
-        color: '#1e5f8e',
-        marginBottom: '0.2rem'
-      },
-      volDesc: {
-        fontSize: '0.78rem',
-        color: '#555'
-      }
+      volRole: { fontSize: '0.875rem', fontWeight: '600' },
+      volOrg: { fontSize: '0.78rem', color: '#1e5f8e', marginBottom: '0.2rem' },
+      volDesc: { fontSize: '0.78rem', color: '#555' }
     };
 
+    /* ─────────────────────────────────────────
+       Preview component
+    ───────────────────────────────────────── */
     var ResumePreview = createClass({
       render: function () {
         var entry = this.props.entry;
         var data = entry.get('data').toJS();
+        var getAsset = this.props.getAsset;
 
-        var experience = data.experience || [];
-        var projects = data.projects || [];
-        var education = data.education || [];
+        var experience     = data.experience     || [];
+        var projects       = data.projects       || [];
+        var education      = data.education      || [];
         var certifications = data.certifications || [];
-        var languages = data.languages || [];
-        var volunteer = data.volunteer || [];
-        var skills = data.skills || {};
+        var languages      = data.languages      || [];
+        var volunteer      = data.volunteer      || [];
+        var skills         = data.skills         || {};
 
-        return h('div', { style: styles.wrap },
+        var profilePicSrc = data.profile_picture
+          ? getAsset(data.profile_picture)
+          : null;
 
-          // Header
+        // Derive initials from name
+        var initials = (data.name || 'DC')
+          .split(' ')
+          .map(function(w) { return w[0]; })
+          .slice(0, 2)
+          .join('');
+
+        return h('div', { style: s.wrap },
+
+          // ── Avatar
+          profilePicSrc
+            ? h('img', { src: profilePicSrc, alt: data.name || '', style: s.avatarImg })
+            : h('div', { style: s.avatar }, initials),
+
+          // ── Header
           h('div', { style: { marginBottom: '0.25rem' } },
-            h('h1', { style: styles.name }, data.name || '—'),
-            h('p', { style: styles.title }, data.title || ''),
-            h('p', { style: styles.location }, data.location || '')
+            h('h1', { style: s.name }, data.name || '—'),
+            h('p', { style: s.jobTitle }, data.title || ''),
+            h('p', { style: s.location }, data.location || '')
           ),
 
-          // Links
-          h('div', { style: styles.links },
-            data.github && h('span', { style: styles.link }, 'github.com/' + data.github),
-            data.linkedin && h('span', { style: styles.link }, 'linkedin.com/in/' + data.linkedin)
+          // ── Links
+          h('div', { style: s.links },
+            data.github   && h('span', { style: s.link }, 'github.com/' + data.github),
+            data.linkedin && h('span', { style: s.link }, 'linkedin.com/in/' + data.linkedin)
           ),
 
-          // Summary
-          h('p', { style: styles.summary }, data.summary || ''),
+          // ── Summary
+          h('p', { style: s.summary }, data.summary || ''),
 
-          // Skills
+          // ── Skills
           Object.keys(skills).length > 0 && h('div', null,
-            h('p', { style: styles.sectionTitle }, 'Skills'),
-            Object.entries(skills).map(function (entry) {
-              return h('div', { key: entry[0], style: { marginBottom: '0.5rem' } },
-                h('span', { style: { fontSize: '0.65rem', textTransform: 'uppercase', color: '#aaa', letterSpacing: '0.08em', marginRight: '0.5rem' } }, entry[0] + ':'),
-                entry[1].map(function (skill) {
-                  return h('span', { key: skill, style: styles.tag }, skill);
-                })
+            h('p', { style: s.sectionTitle }, 'Skills'),
+            Object.entries(skills).map(function(e) {
+              return h('div', { key: e[0], style: { marginBottom: '0.5rem' } },
+                h('span', { style: { fontSize: '0.65rem', textTransform: 'uppercase', color: '#aaa', letterSpacing: '0.08em', marginRight: '0.5rem' } }, e[0] + ':'),
+                e[1].map(function(skill) { return h('span', { key: skill, style: s.tag }, skill); })
               );
             })
           ),
 
-          // Experience
+          // ── Experience
           experience.length > 0 && h('div', null,
-            h('p', { style: styles.sectionTitle }, 'Experience'),
-            experience.map(function (exp, i) {
-              return h('div', { key: i, style: i === experience.length - 1 ? {} : styles.expItem },
-                h('div', { style: styles.expHeader },
-                  h('span', { style: styles.expTitle }, exp.title || ''),
-                  h('span', { style: styles.expDate }, (exp.start || '') + ' – ' + (exp.end || ''))
+            h('p', { style: s.sectionTitle }, 'Experience'),
+            experience.map(function(exp, i) {
+              return h('div', { key: i, style: i === experience.length - 1 ? {} : s.expItem },
+                h('div', { style: s.expHeader },
+                  h('span', { style: s.expTitle }, exp.title || ''),
+                  h('span', { style: s.expDate }, (exp.start || '') + ' – ' + (exp.end || ''))
                 ),
-                h('p', { style: styles.expCompany }, exp.company || ''),
-                exp.client && h('p', { style: styles.expClient }, exp.client),
-                (exp.points || []).map(function (point, j) {
-                  return h('p', { key: j, style: styles.bullet }, '▸ ' + point);
+                h('p', { style: s.expCompany }, exp.company || ''),
+                exp.client && h('p', { style: s.expClient }, exp.client),
+                (exp.points || []).map(function(point, j) {
+                  return h('p', { key: j, style: s.bullet }, '▸ ' + point);
                 })
               );
             })
           ),
 
-          // Projects
+          // ── Projects
           projects.length > 0 && h('div', null,
-            h('p', { style: styles.sectionTitle }, 'Projects'),
-            projects.map(function (proj, i) {
+            h('p', { style: s.sectionTitle }, 'Projects'),
+            projects.map(function(proj, i) {
               return h('div', { key: i, style: { marginBottom: '1rem' } },
                 h('p', { style: { fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.25rem' } }, proj.name || ''),
                 h('p', { style: { fontSize: '0.8rem', color: '#555', marginBottom: '0.4rem' } }, proj.description || ''),
-                (proj.tags || []).map(function (tag) {
-                  return h('span', { key: tag, style: styles.tag }, tag);
-                })
+                (proj.tags || []).map(function(tag) { return h('span', { key: tag, style: s.tag }, tag); })
               );
             })
           ),
 
-          // Education + Certifications
-          h('div', { style: styles.twoCol },
+          // ── Education + Certifications
+          h('div', { style: s.twoCol },
             h('div', null,
-              h('p', { style: styles.sectionTitle }, 'Education'),
-              education.map(function (edu, i) {
+              h('p', { style: s.sectionTitle }, 'Education'),
+              education.map(function(edu, i) {
                 return h('div', { key: i, style: { marginBottom: '0.75rem' } },
                   h('p', { style: { fontSize: '0.875rem', fontWeight: '600' } }, edu.degree || ''),
                   h('p', { style: { fontSize: '0.8rem', color: '#1e5f8e' } }, edu.institution || ''),
@@ -264,37 +285,37 @@
               })
             ),
             h('div', null,
-              h('p', { style: styles.sectionTitle }, 'Certifications'),
-              certifications.map(function (cert, i) {
-                return h('div', { key: i, style: styles.certItem },
+              h('p', { style: s.sectionTitle }, 'Certifications'),
+              certifications.map(function(cert, i) {
+                return h('div', { key: i, style: s.certItem },
                   h('div', null,
-                    h('p', { style: styles.certName }, cert.name || ''),
+                    h('p', { style: s.certName }, cert.name || ''),
                     h('p', { style: { fontSize: '0.72rem', color: '#999' } }, cert.issuer || '')
                   ),
-                  h('span', { style: styles.certDate }, cert.date || '')
+                  h('span', { style: s.certDate }, cert.date || '')
                 );
               })
             )
           ),
 
-          // Languages + Volunteer
-          h('div', { style: styles.twoCol },
+          // ── Languages + Volunteer
+          h('div', { style: s.twoCol },
             h('div', null,
-              h('p', { style: styles.sectionTitle }, 'Languages'),
-              languages.map(function (lang, i) {
-                return h('div', { key: i, style: styles.langItem },
+              h('p', { style: s.sectionTitle }, 'Languages'),
+              languages.map(function(lang, i) {
+                return h('div', { key: i, style: s.langItem },
                   h('span', null, lang.name || ''),
-                  h('span', { style: styles.langLevel }, lang.level || '')
+                  h('span', { style: s.langLevel }, lang.level || '')
                 );
               })
             ),
             h('div', null,
-              h('p', { style: styles.sectionTitle }, 'Volunteer'),
-              volunteer.map(function (vol, i) {
+              h('p', { style: s.sectionTitle }, 'Volunteer'),
+              volunteer.map(function(vol, i) {
                 return h('div', { key: i, style: { marginBottom: '1rem' } },
-                  h('p', { style: styles.volRole }, vol.role || ''),
-                  h('p', { style: styles.volOrg }, (vol.organisation || '') + ' · ' + (vol.start || '') + ' – ' + (vol.end || '')),
-                  h('p', { style: styles.volDesc }, vol.description || '')
+                  h('p', { style: s.volRole }, vol.role || ''),
+                  h('p', { style: s.volOrg }, (vol.organisation || '') + ' · ' + (vol.start || '') + ' – ' + (vol.end || '')),
+                  h('p', { style: s.volDesc }, vol.description || '')
                 );
               })
             )
