@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import resume from '../data/resume.json';
 
-const { name, title, location, github, linkedin, summary, skills, experience, projects, education, certifications, languages, volunteer } = resume;
+const { name, title, location, github, linkedin, summary, skills, experience, projects, education, certifications, languages, volunteer, profile_picture } = resume;
 ---
 
 <Layout>
@@ -10,7 +10,10 @@ const { name, title, location, github, linkedin, summary, skills, experience, pr
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="avatar">DC</div>
+      {profile_picture
+        ? <img class="avatar" src={profile_picture} alt={name} />
+        : <div class="avatar">DC</div>
+      }
 
       <h1 class="name">{name}</h1>
       <p class="job-title">{title}</p>
@@ -194,6 +197,7 @@ const { name, title, location, github, linkedin, summary, skills, experience, pr
     font-weight: 700;
     letter-spacing: 0.02em;
     margin-bottom: 1rem;
+    object-fit: cover;
     box-shadow: 0 2px 8px rgba(30, 95, 142, 0.25);
   }
 
