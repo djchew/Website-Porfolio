@@ -57,7 +57,7 @@
       "name": "Finance Tracking Database",
       "description": "Personal finance tracking system with automated data ingestion, stock price monitoring, analytics dashboards, and investment tracking.",
       "tags": ["Python", "SQL", "Power BI", "ETL"],
-      "link": "https://github.com/djchew"
+      "link": "https://github.com/djchew/finance-db"
     }
   ],
   "education": [
