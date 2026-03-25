@@ -4,20 +4,306 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Editor – Darrell Chew</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+    var h = window.h;
+
+    var styles = {
+      wrap: {
+        fontFamily: "'Inter', -apple-system, sans-serif",
+        background: '#f5f3ee',
+        minHeight: '100vh',
+        padding: '2rem',
+        color: '#1a1a1a',
+        fontSize: '14px',
+        lineHeight: '1.6'
+      },
+      name: {
+        fontSize: '1.6rem',
+        fontWeight: '700',
+        marginBottom: '0.2rem'
+      },
+      title: {
+        fontSize: '0.9rem',
+        color: '#555',
+        marginBottom: '0.2rem'
+      },
+      location: {
+        fontSize: '0.8rem',
+        color: '#999',
+        marginBottom: '1rem'
+      },
+      links: {
+        display: 'flex',
+        gap: '0.5rem',
+        marginBottom: '1.5rem',
+        flexWrap: 'wrap'
+      },
+      link: {
+        fontSize: '0.72rem',
+        fontWeight: '500',
+        padding: '0.25rem 0.6rem',
+        border: '1px solid #b8d4e8',
+        borderRadius: '999px',
+        background: '#f0f7fd',
+        color: '#1e5f8e',
+        textDecoration: 'none'
+      },
+      sectionTitle: {
+        fontSize: '0.62rem',
+        fontWeight: '600',
+        letterSpacing: '0.13em',
+        textTransform: 'uppercase',
+        color: '#999',
+        borderBottom: '1px solid #dbd8cf',
+        paddingBottom: '0.4rem',
+        marginBottom: '1rem',
+        marginTop: '1.75rem'
+      },
+      summary: {
+        fontSize: '0.82rem',
+        color: '#444',
+        lineHeight: '1.7',
+        marginBottom: '0.5rem'
+      },
+      expItem: {
+        marginBottom: '1.25rem',
+        paddingBottom: '1.25rem',
+        borderBottom: '1px solid #ebe8df'
+      },
+      expHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        gap: '1rem',
+        marginBottom: '0.1rem'
+      },
+      expTitle: {
+        fontSize: '0.9rem',
+        fontWeight: '600'
+      },
+      expDate: {
+        fontSize: '0.72rem',
+        color: '#888',
+        background: '#e5e3dc',
+        padding: '0.15rem 0.5rem',
+        borderRadius: '999px',
+        whiteSpace: 'nowrap',
+        flexShrink: '0'
+      },
+      expCompany: {
+        fontSize: '0.8rem',
+        fontWeight: '500',
+        color: '#1e5f8e',
+        marginBottom: '0.1rem'
+      },
+      expClient: {
+        fontSize: '0.75rem',
+        color: '#999',
+        marginBottom: '0.5rem'
+      },
+      bullet: {
+        fontSize: '0.8rem',
+        color: '#444',
+        paddingLeft: '1rem',
+        position: 'relative',
+        marginBottom: '0.25rem'
+      },
+      tag: {
+        fontSize: '0.68rem',
+        fontWeight: '500',
+        padding: '0.18rem 0.5rem',
+        borderRadius: '999px',
+        background: '#dbeafe',
+        color: '#1e40af',
+        display: 'inline-block',
+        marginRight: '0.3rem',
+        marginBottom: '0.3rem'
+      },
+      twoCol: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '2rem'
+      },
+      certItem: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        padding: '0.5rem 0',
+        borderBottom: '1px solid #ebe8df'
+      },
+      certName: {
+        fontSize: '0.82rem',
+        fontWeight: '500'
+      },
+      certDate: {
+        fontSize: '0.72rem',
+        color: '#888',
+        background: '#e5e3dc',
+        padding: '0.15rem 0.5rem',
+        borderRadius: '999px',
+        whiteSpace: 'nowrap'
+      },
+      langItem: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0.35rem 0',
+        borderBottom: '1px solid #ebe8df',
+        fontSize: '0.82rem'
+      },
+      langLevel: {
+        fontSize: '0.72rem',
+        color: '#888',
+        background: '#e5e3dc',
+        padding: '0.15rem 0.5rem',
+        borderRadius: '999px'
+      },
+      volRole: {
+        fontSize: '0.875rem',
+        fontWeight: '600'
+      },
+      volOrg: {
+        fontSize: '0.78rem',
+        color: '#1e5f8e',
+        marginBottom: '0.2rem'
+      },
+      volDesc: {
+        fontSize: '0.78rem',
+        color: '#555'
+      }
+    };
+
+    var ResumePreview = createClass({
+      render: function () {
+        var entry = this.props.entry;
+        var data = entry.get('data').toJS();
+
+        var experience = data.experience || [];
+        var projects = data.projects || [];
+        var education = data.education || [];
+        var certifications = data.certifications || [];
+        var languages = data.languages || [];
+        var volunteer = data.volunteer || [];
+        var skills = data.skills || {};
+
+        return h('div', { style: styles.wrap },
+
+          // Header
+          h('div', { style: { marginBottom: '0.25rem' } },
+            h('h1', { style: styles.name }, data.name || '—'),
+            h('p', { style: styles.title }, data.title || ''),
+            h('p', { style: styles.location }, data.location || '')
+          ),
+
+          // Links
+          h('div', { style: styles.links },
+            data.github && h('span', { style: styles.link }, 'github.com/' + data.github),
+            data.linkedin && h('span', { style: styles.link }, 'linkedin.com/in/' + data.linkedin)
+          ),
+
+          // Summary
+          h('p', { style: styles.summary }, data.summary || ''),
+
+          // Skills
+          Object.keys(skills).length > 0 && h('div', null,
+            h('p', { style: styles.sectionTitle }, 'Skills'),
+            Object.entries(skills).map(function (entry) {
+              return h('div', { key: entry[0], style: { marginBottom: '0.5rem' } },
+                h('span', { style: { fontSize: '0.65rem', textTransform: 'uppercase', color: '#aaa', letterSpacing: '0.08em', marginRight: '0.5rem' } }, entry[0] + ':'),
+                entry[1].map(function (skill) {
+                  return h('span', { key: skill, style: styles.tag }, skill);
+                })
+              );
+            })
+          ),
+
+          // Experience
+          experience.length > 0 && h('div', null,
+            h('p', { style: styles.sectionTitle }, 'Experience'),
+            experience.map(function (exp, i) {
+              return h('div', { key: i, style: i === experience.length - 1 ? {} : styles.expItem },
+                h('div', { style: styles.expHeader },
+                  h('span', { style: styles.expTitle }, exp.title || ''),
+                  h('span', { style: styles.expDate }, (exp.start || '') + ' – ' + (exp.end || ''))
+                ),
+                h('p', { style: styles.expCompany }, exp.company || ''),
+                exp.client && h('p', { style: styles.expClient }, exp.client),
+                (exp.points || []).map(function (point, j) {
+                  return h('p', { key: j, style: styles.bullet }, '▸ ' + point);
+                })
+              );
+            })
+          ),
+
+          // Projects
+          projects.length > 0 && h('div', null,
+            h('p', { style: styles.sectionTitle }, 'Projects'),
+            projects.map(function (proj, i) {
+              return h('div', { key: i, style: { marginBottom: '1rem' } },
+                h('p', { style: { fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.25rem' } }, proj.name || ''),
+                h('p', { style: { fontSize: '0.8rem', color: '#555', marginBottom: '0.4rem' } }, proj.description || ''),
+                (proj.tags || []).map(function (tag) {
+                  return h('span', { key: tag, style: styles.tag }, tag);
+                })
+              );
+            })
+          ),
+
+          // Education + Certifications
+          h('div', { style: styles.twoCol },
+            h('div', null,
+              h('p', { style: styles.sectionTitle }, 'Education'),
+              education.map(function (edu, i) {
+                return h('div', { key: i, style: { marginBottom: '0.75rem' } },
+                  h('p', { style: { fontSize: '0.875rem', fontWeight: '600' } }, edu.degree || ''),
+                  h('p', { style: { fontSize: '0.8rem', color: '#1e5f8e' } }, edu.institution || ''),
+                  h('p', { style: { fontSize: '0.75rem', color: '#999' } }, (edu.start || '') + ' – ' + (edu.end || ''))
+                );
+              })
+            ),
+            h('div', null,
+              h('p', { style: styles.sectionTitle }, 'Certifications'),
+              certifications.map(function (cert, i) {
+                return h('div', { key: i, style: styles.certItem },
+                  h('div', null,
+                    h('p', { style: styles.certName }, cert.name || ''),
+                    h('p', { style: { fontSize: '0.72rem', color: '#999' } }, cert.issuer || '')
+                  ),
+                  h('span', { style: styles.certDate }, cert.date || '')
+                );
+              })
+            )
+          ),
+
+          // Languages + Volunteer
+          h('div', { style: styles.twoCol },
+            h('div', null,
+              h('p', { style: styles.sectionTitle }, 'Languages'),
+              languages.map(function (lang, i) {
+                return h('div', { key: i, style: styles.langItem },
+                  h('span', null, lang.name || ''),
+                  h('span', { style: styles.langLevel }, lang.level || '')
+                );
+              })
+            ),
+            h('div', null,
+              h('p', { style: styles.sectionTitle }, 'Volunteer'),
+              volunteer.map(function (vol, i) {
+                return h('div', { key: i, style: { marginBottom: '1rem' } },
+                  h('p', { style: styles.volRole }, vol.role || ''),
+                  h('p', { style: styles.volOrg }, (vol.organisation || '') + ' · ' + (vol.start || '') + ' – ' + (vol.end || '')),
+                  h('p', { style: styles.volDesc }, vol.description || '')
+                );
+              })
+            )
+          )
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate('resume', ResumePreview);
   </script>
 </body>
 </html>
