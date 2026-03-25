@@ -16,8 +16,6 @@ collections:
           - { label: Full Name, name: name, widget: string }
           - { label: Job Title, name: title, widget: string }
           - { label: Location, name: location, widget: string }
-          - { label: Email, name: email, widget: string }
-          - { label: Phone, name: phone, widget: string }
           - { label: GitHub Username, name: github, widget: string, hint: "Just the username, e.g. djchew" }
           - { label: LinkedIn Username, name: linkedin, widget: string, hint: "Just the username, e.g. darrellchew" }
           - { label: Summary / About, name: summary, widget: text }
