@@ -1,0 +1,108 @@
+{
+  "name": "Darrell Chew",
+  "title": "Data Engineer",
+  "location": "Melbourne, Australia",
+  "email": "darrellchew@hotmail.com",
+  "phone": "+61 432 523 262",
+  "github": "djchew",
+  "linkedin": "darrell-chew",
+  "summary": "Data Engineer with 3+ years of experience building and optimising data pipelines in enterprise environments. Proficient in Python and SQL, with expertise in developing Power BI dashboards and translating complex datasets into actionable insights. Experienced in leading teams and driving data-quality improvements.",
+  "skills": {
+    "Core": ["Python", "SQL", "Power BI", "Data Pipelines"],
+    "Data Engineering": ["ETL (Informatica, Data360)", "Data Modelling", "Data Quality", "SAP Commissions"],
+    "Analytics": ["Customer Analytics", "Machine Learning", "Exploratory Data Analysis"],
+    "Cloud & Libraries": ["Azure", "pandas", "numpy", "scikit-learn"],
+    "Professional": ["Team Leadership", "Stakeholder Management", "Root Cause Analysis", "Process Documentation"]
+  },
+  "experience": [
+    {
+      "title": "Data Engineer",
+      "company": "Cognizant (Data+)",
+      "client": "Telstra – Next Gen Partner Payments (NGPP)",
+      "location": "Melbourne",
+      "start": "Mar 2024",
+      "end": "Present",
+      "points": [
+        "Engineered and optimised end-to-end ETL pipelines for high-volume financial data (B2B/B2C), reducing workflow runtime by 85%.",
+        "Led a 6-member BAU analytics team, overseeing daily operations and ensuring 100% SLA compliance.",
+        "Designed Power BI dashboards tracking financial accuracy and processing velocity, enabling Finance stakeholders to identify data issues early.",
+        "Served as primary technical point of contact, translating complex data exceptions into actionable business insights.",
+        "Supported downstream SAP Commissions applications, acting as subject matter expert on data interpretation and delivery."
+      ]
+    },
+    {
+      "title": "Programmer Analyst",
+      "company": "Cognizant (Data+)",
+      "client": "",
+      "location": "Melbourne",
+      "start": "Sep 2022",
+      "end": "Feb 2024",
+      "points": [
+        "Leveraged advanced SQL to structure and integrate diverse datasets across clinical and financial domains.",
+        "Developed and published Power BI dashboards for key stakeholders, improving resource utilisation and decision-making."
+      ]
+    },
+    {
+      "title": "Graduate Analyst",
+      "company": "Cognizant (Data+)",
+      "client": "",
+      "location": "Melbourne",
+      "start": "Jun 2022",
+      "end": "Sep 2022",
+      "points": [
+        "Completed intensive training in SQL, Power BI development, and enterprise data practices."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Finance Tracking Database",
+      "description": "Personal finance tracking system with automated data ingestion, stock price monitoring, analytics dashboards, and investment tracking.",
+      "tags": ["Python", "SQL", "Power BI", "ETL"],
+      "link": "https://github.com/djchew"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science – Data Science",
+      "institution": "University of Melbourne",
+      "location": "Melbourne",
+      "start": "2019",
+      "end": "2022"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "DP-900 Azure Data Fundamentals",
+      "issuer": "Microsoft",
+      "date": "Jun 2025"
+    },
+    {
+      "name": "Certified SAFe® 5 Agilist",
+      "issuer": "Scaled Agile",
+      "date": "Aug 2022"
+    }
+  ],
+  "languages": [
+    { "name": "English", "level": "Native" },
+    { "name": "French", "level": "Advanced" },
+    { "name": "Chinese", "level": "Basic" },
+    { "name": "Portuguese", "level": "Basic" }
+  ],
+  "volunteer": [
+    {
+      "role": "World Impact Cafe Overseer",
+      "organisation": "CityLife Church",
+      "start": "Sep 2022",
+      "end": "Present",
+      "description": "Led and trained a team of volunteers on operational procedures and customer service."
+    },
+    {
+      "role": "Peer Mentor",
+      "organisation": "University of Melbourne",
+      "start": "Jan 2020",
+      "end": "Aug 2021",
+      "description": "Provided personalised support and guidance to first-semester students, assisting with adaptation and personal development."
+    }
+  ]
+}

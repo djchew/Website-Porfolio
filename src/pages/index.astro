@@ -1,0 +1,621 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resume from '../data/resume.json';
+
+const { name, title, location, email, phone, github, linkedin, summary, skills, experience, projects, education, certifications, languages, volunteer } = resume;
+---
+
+<Layout>
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="avatar">DC</div>
+
+      <h1 class="name">{name}</h1>
+      <p class="job-title">{title}</p>
+      <p class="location">
+        <svg width="11" height="14" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 0C3.24 0 1 2.24 1 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 6.5C5.17 6.5 4.5 5.83 4.5 5S5.17 3.5 6 3.5 7.5 4.17 7.5 5 6.83 6.5 6 6.5z" fill="#9ca3af"/>
+        </svg>
+        {location}
+      </p>
+
+      <div class="social">
+        <a href={`https://github.com/${github}`} target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href={`mailto:${email}`}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="label">About</p>
+        <p class="about-text">{summary}</p>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="label">Skills</p>
+        {Object.entries(skills).map(([group, items]) => (
+          <div class="skills-group">
+            <p class="skills-group-label">{group}</p>
+            <div class="tags">
+              {(items as string[]).map(skill => <span class="tag">{skill}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- EXPERIENCE -->
+      <section class="section">
+        <h2 class="section-title">Experience</h2>
+        {experience.map(exp => (
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-title">{exp.title}</span>
+              <span class="exp-date">{exp.start} – {exp.end}</span>
+            </div>
+            <p class="exp-company">{exp.company}</p>
+            {exp.client && <p class="exp-client">{exp.client}</p>}
+            <ul class="exp-points">
+              {exp.points.map(point => <li>{point}</li>)}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+          {projects.map(project => (
+            <a href={project.link} target="_blank" rel="noopener" class="project-card">
+              <div class="project-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <p class="project-name">{project.name}</p>
+              <p class="project-desc">{project.description}</p>
+              <div class="tags" style="margin-top: 0.75rem;">
+                {project.tags.map(tag => <span class="tag">{tag}</span>)}
+              </div>
+            </a>
+          ))}
+          <div class="project-card project-placeholder">
+            <div class="project-icon muted">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <p class="project-name muted">More coming soon</p>
+            <p class="project-desc muted">Add projects via the admin panel.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION + CERTIFICATIONS -->
+      <div class="two-col">
+        <section class="section">
+          <h2 class="section-title">Education</h2>
+          {education.map(edu => (
+            <div class="edu-item">
+              <p class="edu-degree">{edu.degree}</p>
+              <p class="edu-school">{edu.institution}</p>
+              <p class="edu-date">{edu.start} – {edu.end}</p>
+            </div>
+          ))}
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Certifications</h2>
+          {certifications.map(cert => (
+            <div class="cert-item">
+              <div>
+                <p class="cert-name">{cert.name}</p>
+                <p class="cert-issuer">{cert.issuer}</p>
+              </div>
+              <span class="cert-date">{cert.date}</span>
+            </div>
+          ))}
+        </section>
+      </div>
+
+      <!-- LANGUAGES + VOLUNTEER -->
+      <div class="two-col">
+        <section class="section">
+          <h2 class="section-title">Languages</h2>
+          <div class="lang-grid">
+            {languages.map(lang => (
+              <div class="lang-item">
+                <span class="lang-name">{lang.name}</span>
+                <span class="lang-level">{lang.level}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Volunteer</h2>
+          {volunteer.map(vol => (
+            <div class="vol-item">
+              <p class="vol-role">{vol.role}</p>
+              <p class="vol-org">{vol.organisation} · {vol.start} – {vol.end}</p>
+              <p class="vol-desc">{vol.description}</p>
+            </div>
+          ))}
+        </section>
+      </div>
+
+    </main>
+  </div>
+</Layout>
+
+<style>
+  /* ── Layout ─────────────────────────────────── */
+  .page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+    background: #f5f3ee;
+    color: #1a1a1a;
+  }
+
+  /* ── Sidebar ─────────────────────────────────── */
+  .sidebar {
+    background: #eae8e2;
+    border-right: 1px solid #dbd8cf;
+    padding: 2.5rem 1.75rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+  }
+
+  .avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: #1e5f8e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(30, 95, 142, 0.25);
+  }
+
+  .name {
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111;
+    margin-bottom: 0.2rem;
+  }
+
+  .job-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.4rem;
+  }
+
+  .location {
+    font-size: 0.78rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 1.1rem;
+  }
+
+  /* Social links */
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .social a {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #1e5f8e;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid #b8d4e8;
+    border-radius: 999px;
+    background: #f0f7fd;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .social a:hover {
+    background: #1e5f8e;
+    color: #fff;
+    border-color: #1e5f8e;
+  }
+
+  .social a:hover svg path,
+  .social a:hover svg polyline {
+    stroke: #fff;
+  }
+
+  /* Sidebar sections */
+  .sidebar-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 0.6rem;
+  }
+
+  .about-text {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  /* Skills */
+  .skills-group {
+    margin-bottom: 0.9rem;
+  }
+
+  .skills-group-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #aaa;
+    margin-bottom: 0.35rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  /* ── Main ─────────────────────────────────── */
+  .main {
+    padding: 2.75rem 3rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #999;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #dbd8cf;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Experience */
+  .exp-item {
+    padding-bottom: 1.4rem;
+    margin-bottom: 1.4rem;
+    border-bottom: 1px solid #ebe8df;
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .exp-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .exp-date {
+    font-size: 0.72rem;
+    color: #888;
+    white-space: nowrap;
+    padding: 0.15rem 0.55rem;
+    background: #e5e3dc;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #1e5f8e;
+    margin-bottom: 0.1rem;
+  }
+
+  .exp-client {
+    font-size: 0.75rem;
+    color: #999;
+    margin-bottom: 0.7rem;
+  }
+
+  .exp-points {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.6rem;
+  }
+
+  .exp-points li {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #444;
+    padding-left: 1.1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #1e5f8e;
+    font-size: 0.7rem;
+    top: 0.15rem;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    background: #fff;
+    border: 1px solid #e5e3da;
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:not(.project-placeholder):hover {
+    box-shadow: 0 4px 16px rgba(30, 95, 142, 0.1);
+    border-color: #b8d4e8;
+    transform: translateY(-2px);
+  }
+
+  .project-placeholder {
+    border-style: dashed;
+    background: transparent;
+    cursor: default;
+  }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    background: #dbeafe;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1e5f8e;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-icon.muted {
+    background: #eceae3;
+    color: #bbb;
+  }
+
+  .project-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.35rem;
+  }
+
+  .project-name.muted { color: #bbb; }
+
+  .project-desc {
+    font-size: 0.78rem;
+    color: #666;
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .project-desc.muted { color: #ccc; }
+
+  /* Two-column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  /* Education */
+  .edu-item {
+    margin-bottom: 0.75rem;
+  }
+
+  .edu-degree {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .edu-school {
+    font-size: 0.8rem;
+    color: #1e5f8e;
+    font-weight: 500;
+    margin-top: 0.1rem;
+  }
+
+  .edu-date {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 0.1rem;
+  }
+
+  /* Certifications */
+  .cert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #ebe8df;
+  }
+
+  .cert-item:last-child { border-bottom: none; }
+
+  .cert-name {
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: #111;
+  }
+
+  .cert-issuer {
+    font-size: 0.72rem;
+    color: #999;
+    margin-top: 0.1rem;
+  }
+
+  .cert-date {
+    font-size: 0.72rem;
+    color: #888;
+    white-space: nowrap;
+    padding: 0.15rem 0.5rem;
+    background: #e5e3dc;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  /* Languages */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+  }
+
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #ebe8df;
+  }
+
+  .lang-name {
+    font-size: 0.825rem;
+    font-weight: 500;
+  }
+
+  .lang-level {
+    font-size: 0.72rem;
+    color: #888;
+    padding: 0.15rem 0.5rem;
+    background: #e5e3dc;
+    border-radius: 999px;
+  }
+
+  /* Volunteer */
+  .vol-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ebe8df;
+  }
+
+  .vol-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .vol-role {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .vol-org {
+    font-size: 0.78rem;
+    color: #1e5f8e;
+    margin: 0.1rem 0 0.3rem;
+  }
+
+  .vol-desc {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.55;
+  }
+
+  /* ── Responsive ─────────────────────────────── */
+  @media (max-width: 900px) {
+    .page {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #dbd8cf;
+    }
+
+    .main {
+      padding: 2rem 1.5rem;
+    }
+
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .main {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: resume
+    label: Resume
+    files:
+      - name: resume
+        label: Resume Data
+        file: src/data/resume.json
+        fields:
+          - { label: Full Name, name: name, widget: string }
+          - { label: Job Title, name: title, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: Phone, name: phone, widget: string }
+          - { label: GitHub Username, name: github, widget: string, hint: "Just the username, e.g. djchew" }
+          - { label: LinkedIn Username, name: linkedin, widget: string, hint: "Just the username, e.g. darrellchew" }
+          - { label: Summary / About, name: summary, widget: text }
+
+          - name: skills
+            label: Skills
+            widget: object
+            fields:
+              - { label: Core, name: Core, widget: list, field: { label: Skill, name: skill, widget: string } }
+              - { label: Data Engineering, name: Data Engineering, widget: list, field: { label: Skill, name: skill, widget: string } }
+              - { label: Analytics, name: Analytics, widget: list, field: { label: Skill, name: skill, widget: string } }
+              - { label: "Cloud & Libraries", name: "Cloud & Libraries", widget: list, field: { label: Skill, name: skill, widget: string } }
+              - { label: Professional, name: Professional, widget: list, field: { label: Skill, name: skill, widget: string } }
+
+          - name: experience
+            label: Work Experience
+            widget: list
+            fields:
+              - { label: Job Title, name: title, widget: string }
+              - { label: Company, name: company, widget: string }
+              - { label: Client / Project, name: client, widget: string, required: false }
+              - { label: Location, name: location, widget: string }
+              - { label: Start Date, name: start, widget: string, hint: "e.g. Mar 2024" }
+              - { label: End Date, name: end, widget: string, hint: "e.g. Present or Dec 2023" }
+              - name: points
+                label: Bullet Points
+                widget: list
+                field: { label: Point, name: point, widget: string }
+
+          - name: projects
+            label: Projects
+            widget: list
+            fields:
+              - { label: Project Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Tags, name: tags, widget: list, field: { label: Tag, name: tag, widget: string } }
+              - { label: Link (GitHub or URL), name: link, widget: string }
+
+          - name: education
+            label: Education
+            widget: list
+            fields:
+              - { label: Degree, name: degree, widget: string }
+              - { label: Institution, name: institution, widget: string }
+              - { label: Location, name: location, widget: string }
+              - { label: Start Year, name: start, widget: string }
+              - { label: End Year, name: end, widget: string }
+
+          - name: certifications
+            label: Certifications
+            widget: list
+            fields:
+              - { label: Certification Name, name: name, widget: string }
+              - { label: Issuer, name: issuer, widget: string }
+              - { label: Date, name: date, widget: string, hint: "e.g. Jun 2025" }
+
+          - name: languages
+            label: Languages
+            widget: list
+            fields:
+              - { label: Language, name: name, widget: string }
+              - { label: Proficiency Level, name: level, widget: select, options: [Native, Fluent, Advanced, Intermediate, Basic] }
+
+          - name: volunteer
+            label: Volunteer Experience
+            widget: list
+            fields:
+              - { label: Role, name: role, widget: string }
+              - { label: Organisation, name: organisation, widget: string }
+              - { label: Start Date, name: start, widget: string }
+              - { label: End Date, name: end, widget: string, hint: "e.g. Present" }
+              - { label: Description, name: description, widget: text }
