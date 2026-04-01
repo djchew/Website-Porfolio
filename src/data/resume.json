@@ -123,6 +123,17 @@
         "ETL"
       ],
       "link": "https://github.com/djchew/finance-db"
+    },
+    {
+      "name": "Real Estate Tracker",
+      "description": "Full-stack application for tracking real estate listings and portfolio data, with a TypeScript frontend, Python backend, and PostgreSQL database.",
+      "tags": [
+        "TypeScript",
+        "Python",
+        "PostgreSQL",
+        "Full-Stack"
+      ],
+      "link": "https://github.com/djchew/real-estate-tracker"
     }
   ],
   "languages": [

@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resume from '../data/resume.json';
+
+const { name, projects } = resume;
+---
+
+<Layout title={`Projects – ${name}`}>
+  <div class="projects-page">
+
+    <!-- NAV -->
+    <nav class="top-nav">
+      <a href="/" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        {name}
+      </a>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header" data-animate>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">A collection of things I've built</p>
+    </header>
+
+    <!-- GRID -->
+    <section class="grid">
+      {projects.map((proj, i) => (
+        <a
+          class="card"
+          href={proj.link}
+          target="_blank"
+          rel="noopener"
+          data-animate
+          style={`transition-delay:${i * 90}ms`}
+        >
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <h2 class="card-name">{proj.name}</h2>
+          <p class="card-desc">{proj.description}</p>
+          <div class="card-tags">
+            {proj.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+          <span class="card-link">
+            View on GitHub
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </span>
+        </a>
+      ))}
+
+      <!-- Placeholder -->
+      <div class="card placeholder" data-animate style={`transition-delay:${projects.length * 90}ms`}>
+        <div class="card-icon muted">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+        <h2 class="card-name muted">More coming soon</h2>
+        <p class="card-desc muted">Check back soon for new projects.</p>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  .projects-page {
+    min-height: 100vh;
+    background: var(--bg-page);
+    color: var(--tx-1);
+  }
+
+  /* ── Top nav ─────────────────────────────────────── */
+  .top-nav {
+    background: var(--bg-sidebar);
+    border-bottom: 1px solid var(--bd-main);
+    padding: 0.85rem 2.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: opacity 0.15s;
+  }
+
+  .back-link:hover { opacity: 0.75; }
+
+  /* ── Page header ─────────────────────────────────── */
+  .page-header {
+    padding: 3rem 2.5rem 1.5rem;
+    border-bottom: 1px solid var(--bd-main);
+    margin-bottom: 2.5rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--tx-1);
+    margin-bottom: 0.35rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: var(--tx-muted);
+  }
+
+  /* ── Grid ────────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    padding: 0 2.5rem 3rem;
+  }
+
+  /* ── Card ────────────────────────────────────────── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--bd-card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  }
+
+  .card:not(.placeholder):hover {
+    box-shadow: 0 6px 24px var(--shadow);
+    border-color: var(--bd-accent);
+    transform: translateY(-3px);
+  }
+
+  .placeholder {
+    border-style: dashed;
+    background: transparent;
+    cursor: default;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--icon-bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .card-icon.muted {
+    background: var(--icon-muted);
+    color: var(--tx-muted);
+  }
+
+  .card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tx-1);
+  }
+
+  .card-name.muted { color: var(--tx-muted); }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--tx-3);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-desc.muted { color: var(--tx-subtle); }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-top: 0.25rem;
+  }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 600px) {
+    .top-nav  { padding: 0.75rem 1.25rem; }
+    .page-header { padding: 2rem 1.25rem 1.25rem; }
+    .grid     { padding: 0 1.25rem 2rem; grid-template-columns: 1fr; }
+  }
+
+  /* ── Print ───────────────────────────────────────── */
+  @media print {
+    :root { --bg-page: #fff; --bg-card: #fff; --tx-1: #000; --tx-3: #333; }
+    .card:hover { transform: none; box-shadow: none; }
+    @page { margin: 1.5cm; }
+  }
+</style>

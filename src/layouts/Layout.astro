@@ -1,25 +1,85 @@
 ---
-const { title = "Darrell Chew – Data Engineer" } = Astro.props;
+const { title = "Portfolio" } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Darrell Chew – Data Engineer based in Melbourne, Australia." />
+  <meta name="description" content="Darrell Chew – Data Specialist based in Melbourne, Australia." />
   <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Apply theme before paint to prevent flash -->
+  <script is:inline>
+    (function () {
+      var t = localStorage.getItem('dc-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
   <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-  </style>
 </head>
 <body>
   <slot />
+
+  <!-- ── Floating toolbar ── -->
+  <div class="toolbar">
+    <div class="settings-panel" id="settings-panel" hidden>
+      <p class="settings-label">Appearance</p>
+      <div class="theme-opts">
+
+        <button class="theme-opt" data-t="light">
+          <span class="swatch" style="background:#f5f3ee;border-color:#c8c4bb"></span>
+          <span class="opt-body">
+            <span class="opt-name">Light</span>
+            <span class="opt-desc">Warm &amp; minimal</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <button class="theme-opt" data-t="dark">
+          <span class="swatch" style="background:#0f1923;border-color:#1e3a55"></span>
+          <span class="opt-body">
+            <span class="opt-name">Dark</span>
+            <span class="opt-desc">Easy on the eyes</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <button class="theme-opt" data-t="grey">
+          <span class="swatch" style="background:#f0f0f0;border-color:#c0c0c0"></span>
+          <span class="opt-body">
+            <span class="opt-name">Grey</span>
+            <span class="opt-desc">Clean &amp; neutral</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="tool-btns">
+      <a class="tool-btn" href="/Darrell%20Chew%20Resume.pdf" download="Darrell_Chew_Resume.pdf" title="Download Resume PDF">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </a>
+      <button class="tool-btn" id="btn-settings" title="Appearance">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <script is:inline>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
@@ -31,5 +91,282 @@ const { title = "Darrell Chew – Data Engineer" } = Astro.props;
       });
     }
   </script>
+
+  <script>
+    // ── Theme ──────────────────────────────────────────
+    function applyTheme(t: string) {
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('dc-theme', t);
+      document.querySelectorAll<HTMLElement>('.theme-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.t === t);
+      });
+    }
+
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(currentTheme);
+
+    document.querySelectorAll<HTMLElement>('.theme-opt').forEach(btn => {
+      btn.addEventListener('click', () => applyTheme(btn.dataset.t!));
+    });
+
+    // ── Settings panel ─────────────────────────────────
+    const panel = document.getElementById('settings-panel')!;
+    const btnSettings = document.getElementById('btn-settings')!;
+
+    btnSettings.addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+    });
+
+    document.addEventListener('mousedown', (e) => {
+      if (!panel.hidden && !panel.contains(e.target as Node) && e.target !== btnSettings) {
+        panel.hidden = true;
+      }
+    });
+
+
+    // ── Scroll animations ──────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
+
+<style is:global>
+  /* ── Reset ─────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+  /* ── Theme variables ────────────────────────────── */
+  :root {
+    --bg-page:    #f5f3ee;
+    --bg-sidebar: #eae8e2;
+    --bg-card:    #ffffff;
+    --bd-main:    #dbd8cf;
+    --bd-subtle:  #ebe8df;
+    --bd-card:    #e5e3da;
+    --bd-accent:  #b8d4e8;
+    --tx-1:       #111111;
+    --tx-2:       #444444;
+    --tx-3:       #666666;
+    --tx-muted:   #888888;
+    --tx-subtle:  #999999;
+    --accent:     #1e5f8e;
+    --accent-bg:  #f0f7fd;
+    --tag-bg:     #dbeafe;
+    --tag-color:  #1e40af;
+    --pill-bg:    #e5e3dc;
+    --icon-bg:    #dbeafe;
+    --icon-muted: #eceae3;
+    --avatar-bg:  #1e5f8e;
+    --avatar-fg:  #ffffff;
+    --scrollbar:  #cccccc;
+    --panel-bg:   #ffffff;
+    --panel-bd:   #e0ddd6;
+    --shadow:     rgba(0,0,0,0.08);
+  }
+
+  [data-theme="dark"] {
+    --bg-page:    #0f1923;
+    --bg-sidebar: #0b1828;
+    --bg-card:    #112030;
+    --bd-main:    #1e3a55;
+    --bd-subtle:  #182d42;
+    --bd-card:    #1e3a55;
+    --bd-accent:  #1e4a70;
+    --tx-1:       #e2e8f0;
+    --tx-2:       #a8bac8;
+    --tx-3:       #8a9fb5;
+    --tx-muted:   #6b8099;
+    --tx-subtle:  #5a7090;
+    --accent:     #60b4f0;
+    --accent-bg:  #0a2035;
+    --tag-bg:     #0f2d4a;
+    --tag-color:  #7ec8f4;
+    --pill-bg:    #1a3355;
+    --icon-bg:    #0f2d4a;
+    --icon-muted: #1a2d40;
+    --avatar-bg:  #1e4f7a;
+    --avatar-fg:  #e2e8f0;
+    --scrollbar:  #2a4a65;
+    --panel-bg:   #112030;
+    --panel-bd:   #1e3a55;
+    --shadow:     rgba(0,0,0,0.45);
+  }
+
+  [data-theme="grey"] {
+    --bg-page:    #f0f0f0;
+    --bg-sidebar: #e4e4e4;
+    --bg-card:    #ffffff;
+    --bd-main:    #cccccc;
+    --bd-subtle:  #d8d8d8;
+    --bd-card:    #dddddd;
+    --bd-accent:  #aabbcc;
+    --tx-1:       #111111;
+    --tx-2:       #444444;
+    --tx-3:       #555555;
+    --tx-muted:   #777777;
+    --tx-subtle:  #888888;
+    --accent:     #1e5f8e;
+    --accent-bg:  #eef4fb;
+    --tag-bg:     #d8e8f5;
+    --tag-color:  #1e5f8e;
+    --pill-bg:    #d8d8d8;
+    --icon-bg:    #d8e8f5;
+    --icon-muted: #e0e0e0;
+    --avatar-bg:  #666666;
+    --avatar-fg:  #ffffff;
+    --scrollbar:  #bbbbbb;
+    --panel-bg:   #ffffff;
+    --panel-bd:   #d0d0d0;
+    --shadow:     rgba(0,0,0,0.06);
+  }
+
+  /* ── Scroll animations ──────────────────────────── */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  [data-animate].in-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Toolbar ────────────────────────────────────── */
+  .toolbar {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    z-index: 200;
+  }
+
+  .settings-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-bd);
+    border-radius: 12px;
+    padding: 1rem 1rem 0.75rem;
+    box-shadow: 0 8px 32px var(--shadow);
+    min-width: 210px;
+  }
+
+  .settings-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tx-subtle);
+    margin-bottom: 0.6rem;
+  }
+
+  .theme-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .theme-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    color: var(--tx-1);
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .theme-opt:hover {
+    background: var(--accent-bg);
+    border-color: var(--bd-accent);
+  }
+
+  .theme-opt.active {
+    background: var(--accent-bg);
+    border-color: var(--accent);
+  }
+
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .opt-body { flex: 1; }
+
+  .opt-name {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--tx-1);
+  }
+
+  .opt-desc {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--tx-muted);
+    line-height: 1.3;
+  }
+
+  .opt-check {
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+
+  .theme-opt.active .opt-check { opacity: 1; }
+
+  .tool-btns {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .tool-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-bd);
+    color: var(--tx-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: background 0.15s, color 0.15s, transform 0.1s, border-color 0.15s;
+  }
+
+  .tool-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: scale(1.06);
+  }
+
+  /* ── Print ──────────────────────────────────────── */
+  @media print {
+    .toolbar { display: none !important; }
+    [data-animate] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
