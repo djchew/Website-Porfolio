@@ -1,17 +1,19 @@
 ---
 name: Real Estate Tracker
-description: Full-stack application for tracking real estate listings and portfolio data, with a TypeScript frontend, Python backend, and PostgreSQL database.
+description: Full-stack application for tracking real estate listings and
+  portfolio data, with a TypeScript frontend, Python backend, and PostgreSQL
+  database.
+link: https://github.com/djchew/real-estate-tracker
+date: "2026"
 tags:
   - TypeScript
   - Python
   - PostgreSQL
   - Full-Stack
-link: https://github.com/djchew/real-estate-tracker
 images:
   - /images/projects/Dashboard.png
   - /images/projects/Properties.png
   - /images/projects/Analytics.png
-date: "2024"
 ---
 > **Note:** The properties shown in this app are fictional and used for demonstration purposes only.
 Started this project with a simple question: why do small landlords still manage their properties in spreadsheets?
