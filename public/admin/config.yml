@@ -3,10 +3,33 @@ backend:
   repo: djchew/Website-Porfolio
   branch: main
 
-media_folder: public/uploads
-public_folder: /uploads
+media_folder: public/images/projects
+public_folder: /images/projects
 
 collections:
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Project Name, name: name, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: GitHub / URL, name: link, widget: string }
+      - { label: Year, name: date, widget: string, hint: "e.g. 2024", required: false }
+      - name: tags
+        label: Tags
+        widget: list
+        field: { label: Tag, name: tag, widget: string }
+      - name: images
+        label: Screenshots
+        widget: list
+        required: false
+        field: { label: Image, name: image, widget: image }
+      - { label: Journal Entry, name: body, widget: markdown }
+
   - name: resume
     label: Resume
     files:
