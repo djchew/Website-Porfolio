@@ -35,3 +35,7 @@ Authentication is the obvious next step. Right now it's a single-tenant app — 
 There's something satisfying about building a tool with a clear, specific user in mind. Not "property managers" in the abstract — a person in Melbourne or Sydney with three investment properties, a spreadsheet they hate, and a lease renewal coming up in 47 days.
 
 That's who this is for.
+
+### How I used AI
+
+Claude was my pair programmer throughout this project. I used it for scaffolding the frontend components, writing the FastAPI backend, building the database schema, and rapid iteration on UI/UX. The product vision, feature set, and design direction were all mine — AI accelerated the build so I could go from idea to working app quickly.

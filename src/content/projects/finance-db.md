@@ -31,3 +31,9 @@ Recently added multi-user support. The personal data sits under user_id = NULL, 
 
 It's not pretty from the outside, but it's exactly what I needed.
 
+---
+
+### How I used AI
+
+Claude was my pair programmer throughout this project. I used it for scaffolding the database schema, writing the ETL scripts, debugging edge cases in the data ingestion pipeline, and iterating on the dashboard layout. All architecture decisions, data modelling choices, and feature priorities were mine — AI handled the implementation grunt work so I could focus on what the tool actually needed to do.
+

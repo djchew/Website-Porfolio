@@ -76,6 +76,10 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
       </div>
     </section>
 
+    <footer class="projects-footer" data-animate>
+      <p>Built with the assistance of AI tools</p>
+    </footer>
+
   </div>
 </Layout>
 
@@ -240,6 +244,15 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
     font-weight: 500;
     color: var(--accent);
     margin-top: 0.25rem;
+  }
+
+  /* ── Footer ───────────────────────────────────────── */
+  .projects-footer {
+    text-align: center;
+    padding: 1.5rem 2.5rem 2.5rem;
+    font-size: 0.72rem;
+    color: var(--tx-subtle);
+    font-style: italic;
   }
 
   /* ── Responsive ──────────────────────────────────── */
