@@ -16,18 +16,8 @@ const { name } = resume;
 const { Content } = await proj.render();
 ---
 
-<Layout title={`${proj.data.name} – ${name}`}>
+<Layout title={`${proj.data.name} – ${name}`} path="/projects">
   <div class="detail-page">
-
-    <!-- NAV -->
-    <nav class="top-nav">
-      <a href="/projects" class="back-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-        Projects
-      </a>
-    </nav>
 
     <div class="content-wrap">
 
@@ -103,26 +93,6 @@ const { Content } = await proj.render();
     background: var(--bg-page);
     color: var(--tx-1);
   }
-
-  /* ── Nav ─────────────────────────────────────────── */
-  .top-nav {
-    background: var(--bg-sidebar);
-    border-bottom: 1px solid var(--bd-main);
-    padding: 0.85rem 2.5rem;
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.82rem;
-    font-weight: 500;
-    transition: opacity 0.15s;
-  }
-
-  .back-link:hover { opacity: 0.75; }
 
   /* ── Content wrap ────────────────────────────────── */
   .content-wrap {

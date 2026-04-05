@@ -8,18 +8,8 @@ const projects = await getCollection('projects');
 projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
 ---
 
-<Layout title={`Projects – ${name}`}>
+<Layout title={`Projects – ${name}`} path="/projects">
   <div class="projects-page">
-
-    <!-- NAV -->
-    <nav class="top-nav">
-      <a href="/" class="back-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-        {name}
-      </a>
-    </nav>
 
     <!-- HEADER -->
     <header class="page-header" data-animate>
@@ -89,26 +79,6 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
     background: var(--bg-page);
     color: var(--tx-1);
   }
-
-  /* ── Top nav ─────────────────────────────────────── */
-  .top-nav {
-    background: var(--bg-sidebar);
-    border-bottom: 1px solid var(--bd-main);
-    padding: 0.85rem 2.5rem;
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.82rem;
-    font-weight: 500;
-    transition: opacity 0.15s;
-  }
-
-  .back-link:hover { opacity: 0.75; }
 
   /* ── Page header ─────────────────────────────────── */
   .page-header {
@@ -257,7 +227,6 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
 
   /* ── Responsive ──────────────────────────────────── */
   @media (max-width: 600px) {
-    .top-nav  { padding: 0.75rem 1.25rem; }
     .page-header { padding: 2rem 1.25rem 1.25rem; }
     .grid     { padding: 0 1.25rem 2rem; grid-template-columns: 1fr; }
   }
