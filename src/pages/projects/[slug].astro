@@ -19,6 +19,13 @@ const { Content } = await proj.render();
 <Layout title={`${proj.data.name} – ${name}`} path="/projects">
   <div class="detail-page">
 
+    <a href="/projects" class="back-button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Back to projects
+    </a>
+
     <div class="content-wrap">
 
       <!-- LIGHTBOX -->
@@ -92,6 +99,27 @@ const { Content } = await proj.render();
     min-height: 100vh;
     background: var(--bg-page);
     color: var(--tx-1);
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    margin: 1.5rem 0 0 2.5rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--bd-subtle);
+    border-radius: 8px;
+    background: transparent;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .back-button:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent);
   }
 
   /* ── Content wrap ────────────────────────────────── */

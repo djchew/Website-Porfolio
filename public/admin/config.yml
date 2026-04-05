@@ -3,8 +3,8 @@ backend:
   repo: djchew/Website-Porfolio
   branch: main
 
-media_folder: public/images/projects
-public_folder: /images/projects
+media_folder: public/images/projects/{{slug}}
+public_folder: /images/projects/{{slug}}
 
 collections:
   - name: projects

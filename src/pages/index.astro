@@ -3,7 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import resume from '../data/resume.json';
 
-const { name, title: jobTitle, github, linkedin, summary, skills, experience } = resume;
+const { name, github, linkedin, summary, skills, experience } = resume;
+const jobTitle = "Data Analyst";
 const projects = await getCollection('projects');
 
 // Collect all skills and flatten them
@@ -72,7 +73,7 @@ const allSkills = Object.values(skills).flat() as string[];
         <a href="/resume" class="section-card">
           <div class="card-content">
             <h2>Resume →</h2>
-            <p>{experience[0]?.title || 'Work experience'}</p>
+            <p>Experience & background</p>
           </div>
         </a>
       </div>

@@ -1,37 +1,37 @@
 {
   "skills": {
     "Core": [
-      "Python",
-      "SQL",
-      "Power BI",
-      "Data Pipelines"
+      "SQL (Advanced Optimization)",
+      "Python (Pandas, Numpy)",
+      "Power BI (Advanced DAX)",
+      "ETL/ELT Pipelines"
     ],
-    "Data Engineering": [
-      "ETL (Informatica, Data360)",
-      "Data Modelling",
-      "Data Quality",
-      "SAP Commissions"
+    "Analytics & BI": [
+      "Exploratory Data Analysis",
+      "Data Storytelling",
+      "Business Intelligence"
     ],
-    "Analytics": [
-      "Customer Analytics",
-      "Machine Learning",
-      "Exploratory Data Analysis"
+    "Cloud & DevOps": [
+      "Azure (DP-900)",
+      "Git",
+      "CI/CD Principles",
+      "dbt (Analytics Engineering)"
     ],
-    "Cloud & Libraries": [
-      "Azure",
-      "pandas",
-      "numpy",
-      "scikit-learn"
+    "Tools & Systems": [
+      "Informatica PowerCenter",
+      "SAP Commissions",
+      "Data360",
+      "Excel (Expert)"
     ],
     "Professional": [
-      "Team Leadership",
+      "Team Mentoring",
+      "Agile Methodologies",
       "Stakeholder Management",
-      "Root Cause Analysis",
-      "Process Documentation"
+      "Data Governance"
     ]
   },
   "github": "djchew",
-  "summary": "Data Engineer with 3+ years of experience building and optimising data pipelines in enterprise environments. Proficient in Python and SQL, with expertise in developing Power BI dashboards and translating complex datasets into actionable insights. Experienced in leading teams and driving data-quality improvements.",
+  "summary": "Versatile Analytics professional with over 3 years of experience in enterprise data environments. Proven expertise in architecting high-performance data pipelines, achieving an 85% runtime optimization for financial systems. Strong background in Python, SQL, and Power BI with a focus on translating complex datasets into actionable business intelligence and strategic decision support.",
   "education": [
     {
       "degree": "Bachelor of Science – Data Science",
@@ -43,18 +43,17 @@
   ],
   "experience": [
     {
-      "title": "Data Engineer",
+      "title": "Analytics Engineering Lead (Associate Data Analyst)",
       "company": "Cognizant (Data+)",
       "client": "Telstra – Next Gen Partner Payments (NGPP)",
       "location": "Melbourne",
       "start": "Mar 2024",
       "end": "Present",
       "points": [
-        "Engineered and optimised end-to-end ETL pipelines for high-volume financial data (B2B/B2C), reducing workflow runtime by 85%.",
-        "Led a 6-member BAU analytics team, overseeing daily operations and ensuring 100% SLA compliance.",
-        "Designed Power BI dashboards tracking financial accuracy and processing velocity, enabling Finance stakeholders to identify data issues early.",
-        "Served as primary technical point of contact, translating complex data exceptions into actionable business insights.",
-        "Supported downstream SAP Commissions applications, acting as subject matter expert on data interpretation and delivery."
+        "Led a 6-person Business-As-Usual (BAU) analytics delivery team for a major telecommunications client (Telstra), ensuring 100% SLA compliance for high-volume financial data products.",
+        "Engineered end-to-end data pipelines for the Next Gen Partner Payments (NGPP) system, delivering a verified 85% reduction in runtime and increasing system reliability.",
+        "Collaborated with Finance and Product stakeholders to translate complex data exceptions into actionable insights, driving revenue recovery and process transparency.",
+        "Established data governance protocols and audit-ready reporting standards to ensure data integrity across the enterprise analytics lifecycle."
       ]
     },
     {
@@ -65,8 +64,9 @@
       "start": "Sep 2022",
       "end": "Feb 2024",
       "points": [
-        "Leveraged advanced SQL to structure and integrate diverse datasets across clinical and financial domains.",
-        "Developed and published Power BI dashboards for key stakeholders, improving resource utilisation and decision-making."
+        "Designed and deployed executive-level Power BI dashboards to monitor resource utilization and financial data integration.",
+        "Developed complex SQL-based data models to link disparate datasets, providing the foundational architecture for enterprise-level reporting.",
+        "Performed Root Cause Analysis (RCA) for data discrepancies, significantly reducing reporting errors and improving stakeholder trust in data products."
       ]
     },
     {
@@ -99,17 +99,17 @@
   ],
   "name": "Darrell Chew",
   "location": "Melbourne, Australia",
-  "title": "Data Specialist",
+  "title": "Data Analyst",
   "certifications": [
     {
-      "name": "DP-900 Azure Data Fundamentals",
+      "name": "DP-900 Azure Cloud Certification",
       "issuer": "Microsoft",
       "date": "Jun 2025"
     },
     {
       "name": "Certified SAFe® 5 Agilist",
-      "issuer": "Scaled Agile",
-      "date": "Aug 2022"
+      "issuer": "Scaled Agile, Inc.",
+      "date": "2022"
     }
   ],
   "projects": [
@@ -155,5 +155,5 @@
     }
   ],
   "linkedin": "darrell-chew",
-  "profile_picture": ""
+  "profile_picture": "/profile.jpg"
 }

@@ -8,12 +8,12 @@ tags:
   - ETL
 link: https://github.com/djchew/finance-db
 images:
-  - /images/projects/finance_overview.png
-  - /images/projects/finance_investments.png
-  - /images/projects/finance_spending.png
-  - /images/projects/finance_transactions.png
-  - /images/projects/finance_budget.png
-  - /images/projects/finance_insights.png
+  - /images/projects/finance-db/finance_overview.png
+  - /images/projects/finance-db/finance_investments.png
+  - /images/projects/finance-db/finance_spending.png
+  - /images/projects/finance-db/finance_transactions.png
+  - /images/projects/finance-db/finance_budget.png
+  - /images/projects/finance-db/finance_insights.png
     
 date: "2024"
 ---

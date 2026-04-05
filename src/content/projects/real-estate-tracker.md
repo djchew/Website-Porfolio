@@ -11,9 +11,9 @@ tags:
   - PostgreSQL
   - Full-Stack
 images:
-  - /images/projects/Dashboard.png
-  - /images/projects/Properties.png
-  - /images/projects/Analytics.png
+  - /images/projects/real-estate-tracker/Dashboard.png
+  - /images/projects/real-estate-tracker/Properties.png
+  - /images/projects/real-estate-tracker/Analytics.png
 ---
 > **Note:** The properties shown in this app are fictional and used for demonstration purposes only.
 Started this project with a simple question: why do small landlords still manage their properties in spreadsheets?
