@@ -21,6 +21,7 @@ const allSkills = Object.values(skills).flat() as string[];
         <h1>{name}</h1>
         <p class="hero-title">{jobTitle}</p>
         <p class="hero-tagline">Turning raw data into decisions.</p>
+        <p class="hero-stat">85% pipeline optimisation · 3+ yrs enterprise data · Telstra</p>
         <div class="hero-socials">
           <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -43,6 +44,7 @@ const allSkills = Object.values(skills).flat() as string[];
     <!-- ABOUT -->
     <section class="about">
       <div class="about-inner">
+        <span class="about-label">About</span>
         <p class="about-text">{summary}</p>
       </div>
     </section>
@@ -120,7 +122,7 @@ const allSkills = Object.values(skills).flat() as string[];
   }
 
   .hero-content h1 {
-    font-size: 4.5rem;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 0.5rem;
@@ -140,6 +142,14 @@ const allSkills = Object.values(skills).flat() as string[];
     margin-bottom: 2rem;
   }
 
+  .hero-stat {
+    font-size: 0.85rem;
+    color: var(--tx-3);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
   .hero-socials {
     display: flex;
     justify-content: center;
@@ -151,8 +161,8 @@ const allSkills = Object.values(skills).flat() as string[];
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     color: var(--tx-2);
     border: 1px solid var(--bd-subtle);
     border-radius: 8px;
@@ -209,36 +219,14 @@ const allSkills = Object.values(skills).flat() as string[];
     text-align: center;
   }
 
-  .location-chip {
-    font-size: 0.78rem;
-    color: var(--tx-muted);
-    padding: 0.4rem 0.75rem;
-    background: var(--pill-bg);
-    border-radius: 999px;
-    font-weight: 500;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: var(--tx-2);
-    border: 1px solid var(--bd-subtle);
-    border-radius: 8px;
-    background: transparent;
-    transition: color 0.15s, border-color 0.15s;
-  }
-
-  .social-links a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+  .about-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tx-subtle);
+    display: block;
+    margin-bottom: 1rem;
   }
 
   /* ── Skills Cloud ────────────────────────────────── */
@@ -300,6 +288,7 @@ const allSkills = Object.values(skills).flat() as string[];
   .section-card:hover {
     border-color: var(--accent);
     box-shadow: 0 4px 16px var(--shadow);
+    transform: translateY(-2px);
   }
 
   .card-content {
@@ -329,8 +318,24 @@ const allSkills = Object.values(skills).flat() as string[];
       font-size: 1rem;
     }
 
+    .about {
+      padding: 0 1.25rem 2rem;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+    }
+
+    .skills-section {
+      padding: 1.5rem 1.25rem;
+    }
+
     .cards-grid {
       grid-template-columns: 1fr;
+    }
+
+    .cards-section {
+      padding: 2rem 1.25rem;
     }
 
     .about-meta {
@@ -350,6 +355,14 @@ const allSkills = Object.values(skills).flat() as string[];
       document.addEventListener('mousemove', (e) => {
         const x = (e.clientX / window.innerWidth) * 100;
         const y = (e.clientY / window.innerHeight) * 100;
+        grid.style.setProperty('--mx', `${x}px`);
+        grid.style.setProperty('--my', `${y}px`);
+      });
+
+      document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const x = (touch.clientX / window.innerWidth) * 100;
+        const y = (touch.clientY / window.innerHeight) * 100;
         grid.style.setProperty('--mx', `${x}px`);
         grid.style.setProperty('--my', `${y}px`);
       });

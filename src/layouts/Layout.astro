@@ -23,8 +23,6 @@ const { title = "Portfolio", path = "/" } = Astro.props;
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-
-  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <!-- ── Top Navigation ── -->
@@ -341,6 +339,9 @@ const { title = "Portfolio", path = "/" } = Astro.props;
   .nav-icons a {
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
     color: var(--tx-2);
     transition: color 0.15s;
   }
@@ -468,6 +469,28 @@ const { title = "Portfolio", path = "/" } = Astro.props;
     color: #fff;
     border-color: var(--accent);
     transform: scale(1.06);
+  }
+
+  /* ── Responsive ─────────────────────────────────── */
+  @media (max-width: 600px) {
+    .top-nav {
+      padding: 0.75rem 1rem;
+    }
+    .nav-links {
+      gap: 1rem;
+    }
+    .nav-icons {
+      padding-left: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .settings-panel {
+      right: 1rem;
+      left: 1rem;
+      min-width: unset;
+      width: calc(100vw - 2rem);
+    }
   }
 
   /* ── Page transitions ───────────────────────────── */

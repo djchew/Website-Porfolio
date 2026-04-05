@@ -403,8 +403,19 @@ const { Content } = await proj.render();
   }
 
   /* ── Responsive ─────────────────────────────────── */
+  @media (max-width: 780px) {
+    .hero-thumb {
+      width: 100%;
+      margin-left: 0;
+    }
+    .gallery {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
   @media (max-width: 600px) {
-    .top-nav { padding: 0.75rem 1.25rem; }
+    .back-button { margin-left: 1rem; }
     .content-wrap { padding: 2rem 1.25rem 3rem; }
     .proj-title { font-size: 1.5rem; }
     .gallery-thumb { width: 60px; height: 40px; }
@@ -413,10 +424,12 @@ const { Content } = await proj.render();
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return; // No images on this page
+
     const mainImg = document.getElementById('gallery-main-img') as HTMLImageElement | null;
-    const lightbox = document.getElementById('lightbox')!;
     const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-    const lightboxClose = document.getElementById('lightbox-close')!;
+    const lightboxClose = document.getElementById('lightbox-close') as HTMLButtonElement;
 
     // ── Gallery thumb switching ──
     document.querySelectorAll<HTMLButtonElement>('.gallery-thumb').forEach(btn => {
@@ -452,7 +465,9 @@ const { Content } = await proj.render();
       img.addEventListener('click', () => openLightbox(img.dataset.src ?? img.src, img.alt));
     });
 
-    lightboxClose.addEventListener('click', closeLightbox);
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
   });

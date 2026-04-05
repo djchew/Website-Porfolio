@@ -61,23 +61,13 @@
       "company": "Cognizant (Data+)",
       "client": "",
       "location": "Melbourne",
-      "start": "Sep 2022",
+      "start": "Jun 2022",
       "end": "Feb 2024",
       "points": [
+        "Joined as Graduate Analyst, promoted to Programmer Analyst after 3 months of intensive SQL and Power BI training.",
         "Designed and deployed executive-level Power BI dashboards to monitor resource utilization and financial data integration.",
         "Developed complex SQL-based data models to link disparate datasets, providing the foundational architecture for enterprise-level reporting.",
         "Performed Root Cause Analysis (RCA) for data discrepancies, significantly reducing reporting errors and improving stakeholder trust in data products."
-      ]
-    },
-    {
-      "title": "Graduate Analyst",
-      "company": "Cognizant (Data+)",
-      "client": "",
-      "location": "Melbourne",
-      "start": "Jun 2022",
-      "end": "Sep 2022",
-      "points": [
-        "Completed intensive training in SQL, Power BI development, and enterprise data practices."
       ]
     }
   ],
