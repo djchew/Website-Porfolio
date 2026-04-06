@@ -4,6 +4,11 @@ description: Full-stack application for tracking real estate listings and
   portfolio data, with a TypeScript frontend, Python backend, and PostgreSQL
   database.
 link: https://github.com/djchew/real-estate-tracker
+role: Full-stack developer
+outcomes:
+  - Built a landlord dashboard that tracks financials, lease risk, and maintenance.
+  - Automated listing imports and produced accountant-ready exports/reports.
+  - Designed a warm UI that improves daily usability for non-technical users.
 date: "2026"
 tags:
   - TypeScript
@@ -14,6 +19,7 @@ images:
   - /images/projects/real-estate-tracker/Dashboard.png
   - /images/projects/real-estate-tracker/Properties.png
   - /images/projects/real-estate-tracker/Analytics.png
+seoImage: /images/projects/real-estate-tracker/Dashboard.png
 ---
 > **Note:** The properties shown in this app are fictional and used for demonstration purposes only.
 Started this project with a simple question: why do small landlords still manage their properties in spreadsheets?

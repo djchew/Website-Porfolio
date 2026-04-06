@@ -6,12 +6,19 @@ import resume from '../data/resume.json';
 const { name, github, linkedin, summary, skills, experience } = resume;
 const jobTitle = "Data Analyst";
 const projects = await getCollection('projects');
+const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in Melbourne building data pipelines, dashboards, and analytics products.";
 
 // Collect all skills and flatten them
 const allSkills = Object.values(skills).flat() as string[];
 ---
 
-<Layout title={name} path="/">
+<Layout
+  title={name}
+  path="/"
+  canonicalPath="/"
+  description={pageDescription}
+  ogType="website"
+>
   <div class="homepage">
 
     <!-- HERO -->
@@ -22,14 +29,15 @@ const allSkills = Object.values(skills).flat() as string[];
         <p class="hero-title">{jobTitle}</p>
         <p class="hero-tagline">Turning raw data into decisions.</p>
         <p class="hero-stat">85% pipeline optimisation · 3+ yrs enterprise data · Telstra</p>
+        <span class="availability-chip">Open to new opportunities · Melbourne + Remote</span>
         <div class="hero-socials">
-          <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub">
+          <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
-          <a href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener" title="LinkedIn">
+          <a href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn profile">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a id="email-link" href="#">
+          <a id="email-link" href="#" aria-label="Send email">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
@@ -46,6 +54,7 @@ const allSkills = Object.values(skills).flat() as string[];
       <div class="about-inner">
         <span class="about-label">About</span>
         <p class="about-text">{summary}</p>
+        <p class="about-philosophy">I'm a systems thinker who builds for production. I care about data quality first, then speed. I thrive in ambiguous problems where the data tells a story — and I believe good analysis should need no explanation.</p>
       </div>
     </section>
 
@@ -146,8 +155,21 @@ const allSkills = Object.values(skills).flat() as string[];
     font-size: 0.85rem;
     color: var(--tx-3);
     font-weight: 500;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.02em;
+  }
+
+  .availability-chip {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.4rem 0.75rem;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--bd-accent);
+    border-radius: 999px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.01em;
   }
 
   .hero-socials {
@@ -227,6 +249,16 @@ const allSkills = Object.values(skills).flat() as string[];
     color: var(--tx-subtle);
     display: block;
     margin-bottom: 1rem;
+  }
+
+  .about-philosophy {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--tx-3);
+    margin-top: 1.25rem;
   }
 
   /* ── Skills Cloud ────────────────────────────────── */
@@ -347,26 +379,35 @@ const allSkills = Object.values(skills).flat() as string[];
 </style>
 
 <script>
+  type GridState = { target: HTMLElement | null };
+
+  const state = ((window as any).__heroGridState ??= { target: null }) as GridState;
+  const hasBoundListeners = !!(window as any).__heroGridBound;
+
+  if (!hasBoundListeners) {
+    const handlePointerMove = (clientX: number, clientY: number) => {
+      if (!state.target) return;
+      const x = (clientX / window.innerWidth) * 100;
+      const y = (clientY / window.innerHeight) * 100;
+      state.target.style.setProperty('--mx', `${x}px`);
+      state.target.style.setProperty('--my', `${y}px`);
+    };
+
+    document.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      handlePointerMove(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    (window as any).__heroGridBound = true;
+  }
+
   document.addEventListener('astro:page-load', () => {
     const hero = document.getElementById('hero');
-    const grid = hero?.querySelector('.hero-grid') as HTMLElement;
-
-    if (grid) {
-      document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) * 100;
-        const y = (e.clientY / window.innerHeight) * 100;
-        grid.style.setProperty('--mx', `${x}px`);
-        grid.style.setProperty('--my', `${y}px`);
-      });
-
-      document.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const x = (touch.clientX / window.innerWidth) * 100;
-        const y = (touch.clientY / window.innerHeight) * 100;
-        grid.style.setProperty('--mx', `${x}px`);
-        grid.style.setProperty('--my', `${y}px`);
-      });
-    }
+    const grid = hero?.querySelector('.hero-grid') as HTMLElement | null;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    state.target = reducedMotion ? null : grid;
 
     // Email obfuscation
     const u = 'darrellchew';

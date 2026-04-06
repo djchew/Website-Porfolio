@@ -8,10 +8,16 @@ tags:
   - PostgreSQL
   - Geospatial
 link: https://github.com/djchew/melbourne-liveability
+role: Data and geospatial engineer
+outcomes:
+  - Computed liveability scoring across 673 Melbourne suburbs.
+  - Combined five public datasets into a single explainable index.
+  - Delivered an interactive map for suburb comparisons and exploration.
 date: "2025"
 images:
   - /images/projects/melbourne-liveability/Overview.png
   - /images/projects/melbourne-liveability/Suburb.png
+seoImage: /images/projects/melbourne-liveability/Overview.png
 ---
 
 Started this project because choosing where to live in Melbourne shouldn't be a guessing game. Real estate websites show prices, but they don't tell you whether it's safe, whether you can get to work on public transport, or if your kids would have good schools nearby.

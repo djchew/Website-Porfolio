@@ -7,6 +7,11 @@ tags:
   - Power BI
   - ETL
 link: https://github.com/djchew/finance-db
+role: End-to-end developer
+outcomes:
+  - Centralized banking, investment, and budget data into one queryable platform.
+  - Added multi-user isolation with PostgreSQL row-level security.
+  - Automated ingestion and pricing updates to reduce manual tracking overhead.
 images:
   - /images/projects/finance-db/finance_overview.png
   - /images/projects/finance-db/finance_investments.png
@@ -16,6 +21,7 @@ images:
   - /images/projects/finance-db/finance_insights.png
     
 date: "2024"
+seoImage: /images/projects/finance-db/finance_overview.png
 ---
 > **Note:** The financial information shown in this app are fictional and used for demonstration purposes only.
 

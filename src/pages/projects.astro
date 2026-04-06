@@ -6,9 +6,16 @@ import resume from '../data/resume.json';
 const { name } = resume;
 const projects = await getCollection('projects');
 projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const pageDescription = "Portfolio projects by Darrell Chew covering analytics engineering, data pipelines, dashboards, and full-stack data products.";
 ---
 
-<Layout title={`Projects – ${name}`} path="/projects">
+<Layout
+  title={`Projects - ${name}`}
+  path="/projects"
+  canonicalPath="/projects"
+  description={pageDescription}
+  ogType="website"
+>
   <div class="projects-page">
 
     <!-- HEADER -->
@@ -28,7 +35,7 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
         >
           <div class="card-thumb">
             {(proj.data.image ?? proj.data.images?.[0])
-              ? <img src={proj.data.image ?? proj.data.images?.[0]} alt={proj.data.name} />
+              ? <img src={proj.data.image ?? proj.data.images?.[0]} alt={proj.data.name} loading="lazy" decoding="async" width="1280" height="720" />
               : <div class="card-thumb-placeholder">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
@@ -37,8 +44,15 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
             }
           </div>
           <div class="card-body">
+            <div class="card-meta">
+              {proj.data.date && <span class="meta-pill">{proj.data.date}</span>}
+              {proj.data.role && <span class="meta-pill">{proj.data.role}</span>}
+            </div>
             <h2 class="card-name">{proj.data.name}</h2>
             <p class="card-desc">{proj.data.description}</p>
+            {proj.data.outcomes?.[0] && (
+              <p class="card-outcome">{proj.data.outcomes[0]}</p>
+            )}
             <div class="card-tags">
               {proj.data.tags.map(tag => <span class="tag">{tag}</span>)}
             </div>
@@ -52,16 +66,16 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
         </a>
       ))}
 
-      <!-- Placeholder -->
+      <!-- In Progress -->
       <div class="card placeholder" data-animate style={`transition-delay:${projects.length * 90}ms`}>
         <div class="card-thumb card-thumb-placeholder muted">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            <circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/>
           </svg>
         </div>
         <div class="card-body">
-          <h2 class="card-name muted">More coming soon</h2>
-          <p class="card-desc muted">Check back soon for new projects.</p>
+          <h2 class="card-name muted">More in the works</h2>
+          <p class="card-desc muted">Exploring new ideas · Follow GitHub for updates</p>
         </div>
       </div>
     </section>
@@ -170,6 +184,21 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
     flex: 1;
   }
 
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .meta-pill {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--pill-bg);
+    color: var(--tx-muted);
+  }
+
   .card-name {
     font-size: 1rem;
     font-weight: 600;
@@ -183,6 +212,14 @@ projects.sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
     color: var(--tx-3);
     line-height: 1.6;
     flex: 1;
+  }
+
+  .card-outcome {
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: var(--tx-2);
+    border-left: 2px solid var(--bd-accent);
+    padding-left: 0.5rem;
   }
 
   .card-desc.muted { color: var(--tx-subtle); }
