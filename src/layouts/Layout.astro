@@ -546,14 +546,21 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
   }
 
   .nav-backdrop {
-    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.25);
     z-index: 49;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    visibility: hidden;
   }
 
-  .nav-backdrop:not([hidden]) { display: block; }
+  .nav-backdrop:not([hidden]) {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
 
   @media (min-width: 601px) {
     .nav-backdrop { display: none !important; }
