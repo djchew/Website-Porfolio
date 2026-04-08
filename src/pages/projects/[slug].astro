@@ -10,8 +10,8 @@ export async function getStaticPaths() {
     params: { slug: proj.slug },
     props: {
       proj,
-      prev: projects[i + 1] ?? null,
-      next: projects[i - 1] ?? null,
+      prev: projects[i - 1] ?? null,
+      next: projects[i + 1] ?? null,
     },
   }));
 }
@@ -173,7 +173,7 @@ const canonicalPath = `/projects/${proj.slug}`;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 0 1rem 2.5rem;
+    padding: 1rem 0 1rem 2rem;
     font-size: 0.82rem;
     color: var(--tx-2);
     margin: 1.5rem 0 0 0;
@@ -376,7 +376,8 @@ const canonicalPath = `/projects/${proj.slug}`;
   }
 
   .proj-title {
-    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--tx-1);
     line-height: 1.2;
@@ -444,7 +445,7 @@ const canonicalPath = `/projects/${proj.slug}`;
   .journal-heading {
     font-size: 0.65rem;
     font-weight: 600;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--tx-subtle);
     margin-bottom: 1.5rem;
