@@ -2,6 +2,10 @@ backend:
   name: github
   repo: djchew/Website-Porfolio
   branch: main
+  auth_type: implicit
+  authorization:
+    users:
+      - djchew
 
 media_folder: public/images/projects/{{slug}}
 public_folder: /images/projects/{{slug}}
