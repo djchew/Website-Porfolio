@@ -66,16 +66,16 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
         </a>
       ))}
 
-      <!-- In Progress -->
-      <div class="card placeholder" data-animate style={`transition-delay:${projects.length * 90}ms`}>
-        <div class="card-thumb card-thumb-placeholder muted">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <div class="card-body">
-          <h2 class="card-name muted">More in the works</h2>
-          <p class="card-desc muted">Exploring new ideas · Follow GitHub for updates</p>
+      <!-- CTA Card -->
+      <div class="card cta-card" data-animate style={`transition-delay:${projects.length * 90}ms`}>
+        <div class="card-body cta-body">
+          <p class="cta-eyebrow">Open to work</p>
+          <h2 class="cta-heading">Let's build something together</h2>
+          <p class="cta-sub">Open to full-time and contract roles in Melbourne or remote.</p>
+          <div class="cta-actions">
+            <a class="cta-btn primary" href="https://linkedin.com/in/darrell-chew" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">LinkedIn</a>
+            <a class="cta-btn secondary" id="cta-email" href="#">Email me</a>
+          </div>
         </div>
       </div>
     </section>
@@ -93,7 +93,7 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
   /* ── Page header ─────────────────────────────────── */
   .page-header {
     padding: 3rem 2.5rem 1.5rem;
-    border-bottom: 1px solid var(--bd-main);
+    border-bottom: 1px solid var(--bd-subtle);
     margin-bottom: 2.5rem;
   }
 
@@ -112,9 +112,11 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
   /* ── Grid ────────────────────────────────────────── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 1.25rem;
     padding: 0 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   /* ── Card ────────────────────────────────────────── */
@@ -249,10 +251,92 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     margin-top: 0.25rem;
   }
 
+  /* ── CTA Card ──────────────────────────────────────── */
+  .cta-card {
+    background: transparent;
+    border: 2px dashed var(--bd-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+  }
+
+  .cta-body {
+    padding: 2rem;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .cta-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tx-subtle);
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-heading {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--tx-1);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-sub {
+    font-size: 0.85rem;
+    color: var(--tx-3);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .cta-btn {
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: 1px solid;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .cta-btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .cta-btn.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .cta-btn.secondary:hover {
+    background: var(--accent-bg);
+  }
+
   /* ── Responsive ──────────────────────────────────── */
   @media (max-width: 600px) {
     .page-header { padding: 2rem 1.25rem 1.25rem; }
     .grid     { padding: 0 1.25rem 2rem; grid-template-columns: 1fr; }
+    .cta-heading { font-size: 1.15rem; }
+    .cta-actions { flex-direction: column; }
+    .cta-btn { width: 100%; }
   }
 
   /* ── Print ───────────────────────────────────────── */
@@ -262,3 +346,12 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     @page { margin: 1.5cm; }
   }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const u = 'darrellchew';
+    const d = 'hotmail.com';
+    const link = document.getElementById('cta-email') as HTMLAnchorElement;
+    if (link) link.href = 'mailto:' + u + '@' + d;
+  });
+</script>

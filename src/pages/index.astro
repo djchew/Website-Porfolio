@@ -9,7 +9,7 @@ const projects = await getCollection('projects');
 const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in Melbourne building data pipelines, dashboards, and analytics products.";
 
 // Collect all skills and flatten them
-const allSkills = Object.values(skills).flat() as string[];
+const allSkills = Object.values(skills).flat() as { name: string; level: string }[];
 ---
 
 <Layout
@@ -28,7 +28,7 @@ const allSkills = Object.values(skills).flat() as string[];
         <h1>{name}</h1>
         <p class="hero-title">{jobTitle}</p>
         <p class="hero-tagline">Turning raw data into decisions.</p>
-        <p class="hero-stat">85% pipeline optimisation · 3+ yrs enterprise data · Telstra</p>
+        <p class="hero-stat">85% ETL runtime reduction · 3+ yrs enterprise data · Telstra</p>
         <span class="availability-chip">Open to new opportunities · Melbourne + Remote</span>
         <div class="hero-socials">
           <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile">
@@ -62,10 +62,10 @@ const allSkills = Object.values(skills).flat() as string[];
     <section class="skills-section">
       <div class="skills-cloud">
         {allSkills.map(skill => {
-          const randomOpacity = Math.random() * 0.6 + 0.4; // 0.4 to 1.0
+          const randomOpacity = Math.random() * 0.25 + 0.75; // 0.75 to 1.0
           return (
-            <span class="skill-tag" style={`--skill-opacity: ${randomOpacity}`}>
-              {skill}
+            <span class={`skill-tag skill-tag--${skill.level}`} style={`--skill-opacity: ${randomOpacity}`} data-level={skill.level}>
+              {skill.level === 'expert' ? '• ' : ''}{skill.name}
             </span>
           );
         })}
@@ -290,6 +290,10 @@ const allSkills = Object.values(skills).flat() as string[];
 
   .skill-tag:hover {
     opacity: 1;
+  }
+
+  .skill-tag--expert {
+    font-weight: 600;
   }
 
   /* ── Section Cards ───────────────────────────────── */

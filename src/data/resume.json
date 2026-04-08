@@ -1,33 +1,33 @@
 {
   "skills": {
     "Core": [
-      "SQL (Advanced Optimization)",
-      "Python (Pandas, Numpy)",
-      "Power BI (Advanced DAX)",
-      "ETL/ELT Pipelines"
+      { "name": "SQL (Advanced Optimization)", "level": "expert" },
+      { "name": "Python (Pandas, NumPy)", "level": "expert" },
+      { "name": "Power BI (Advanced DAX)", "level": "expert" },
+      { "name": "ETL/ELT Pipelines", "level": "expert" }
     ],
     "Analytics & BI": [
-      "Exploratory Data Analysis",
-      "Data Storytelling",
-      "Business Intelligence"
+      { "name": "Exploratory Data Analysis", "level": "expert" },
+      { "name": "Data Storytelling", "level": "expert" },
+      { "name": "Business Intelligence", "level": "expert" }
     ],
     "Cloud & DevOps": [
-      "Azure (DP-900)",
-      "Git",
-      "CI/CD Principles",
-      "dbt (Analytics Engineering)"
+      { "name": "Azure (DP-900)", "level": "intermediate" },
+      { "name": "Git", "level": "intermediate" },
+      { "name": "CI/CD Principles", "level": "intermediate" },
+      { "name": "dbt (Analytics Engineering)", "level": "intermediate" }
     ],
     "Tools & Systems": [
-      "Informatica PowerCenter",
-      "SAP Commissions",
-      "Data360",
-      "Excel (Expert)"
+      { "name": "Informatica PowerCenter", "level": "expert" },
+      { "name": "SAP Commissions", "level": "expert" },
+      { "name": "Data360", "level": "intermediate" },
+      { "name": "Excel (Intermediate)", "level": "intermediate" }
     ],
     "Professional": [
-      "Team Mentoring",
-      "Agile Methodologies",
-      "Stakeholder Management",
-      "Data Governance"
+      { "name": "Team Mentoring", "level": "expert" },
+      { "name": "Agile Methodologies", "level": "expert" },
+      { "name": "Stakeholder Management", "level": "expert" },
+      { "name": "Data Governance", "level": "expert" }
     ]
   },
   "github": "djchew",

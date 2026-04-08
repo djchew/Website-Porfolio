@@ -79,7 +79,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <!-- ── Top Navigation ── -->
-  <nav class="top-nav" aria-label="Main">
+  <nav class="top-nav" data-page={path} aria-label="Main">
     <a href="/" class="nav-logo">Darrell Chew</a>
     <div class="nav-links">
       <a href="/projects" class={`nav-link${path === "/projects" || path.startsWith("/projects/") ? " active" : ""}`}>
@@ -99,6 +99,21 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
         </a>
       </div>
     </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-mobile-menu" id="nav-mobile-menu" hidden>
+      <a href="/">Home</a>
+      <a href="/projects" class={path === "/projects" || path.startsWith("/projects/") ? "active" : ""}>Projects</a>
+      <a href="/resume" class={path === "/resume" ? "active" : ""}>Resume</a>
+      <div class="nav-mobile-divider"></div>
+      <a href="https://github.com/djchew" target="_blank" rel="noopener" aria-label="GitHub profile">GitHub</a>
+      <a href="https://linkedin.com/in/darrell-chew" target="_blank" rel="noopener" aria-label="LinkedIn profile">LinkedIn</a>
+      <a id="nav-mobile-email" href="#">Email</a>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop" hidden></div>
   </nav>
 
   <main id="main-content">
@@ -158,6 +173,11 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     </div>
   </div>
 
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <p class="footer-copy">© {new Date().getFullYear()} Darrell Chew</p>
+  </footer>
+
   <script is:inline>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
@@ -214,6 +234,41 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
       document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
     }
 
+    // ── Hamburger menu ─────────────────────────────
+    function initHamburger() {
+      const btn = document.getElementById('nav-hamburger') as HTMLButtonElement | null;
+      const menu = document.getElementById('nav-mobile-menu') as HTMLElement | null;
+      const backdrop = document.getElementById('nav-backdrop') as HTMLElement | null;
+      if (!btn || !menu) return;
+
+      const closeMenu = () => {
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        if (backdrop) backdrop.hidden = true;
+      };
+
+      btn.addEventListener('click', () => {
+        const isOpen = !menu.hidden;
+        menu.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        if (backdrop) backdrop.hidden = isOpen;
+      });
+
+      menu.querySelectorAll<HTMLAnchorElement>('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      if (backdrop) {
+        backdrop.addEventListener('click', closeMenu);
+      }
+
+      document.addEventListener('mousedown', (e) => {
+        if (!menu.hidden && !menu.contains(e.target as Node) && e.target !== btn && e.target !== backdrop) {
+          closeMenu();
+        }
+      });
+    }
+
     // ── Init on first load and after each page transition ──
     function init() {
       const theme = localStorage.getItem('dc-theme') ||
@@ -221,6 +276,15 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
       applyTheme(theme);
       initSettingsPanel();
       initAnimations();
+      initHamburger();
+
+      // Email obfuscation for footer
+      const u = 'darrellchew';
+      const d = 'hotmail.com';
+      const footerEmail = document.getElementById('footer-email') as HTMLAnchorElement;
+      if (footerEmail) footerEmail.href = 'mailto:' + u + '@' + d;
+      const navMobileEmail = document.getElementById('nav-mobile-email') as HTMLAnchorElement;
+      if (navMobileEmail) navMobileEmail.href = 'mailto:' + u + '@' + d;
     }
 
     document.addEventListener('astro:page-load', init);
@@ -231,10 +295,15 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
 <style is:global>
   /* ── Reset ─────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  html { scroll-behavior: smooth; height: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
   h1 { font-family: 'Playfair Display', serif; }
-  main { display: block; }
+  main { display: flex; flex-direction: column; flex: 1; }
 
   .skip-link {
     position: absolute;
@@ -361,9 +430,12 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2.5rem;
-    background: var(--bg-sidebar);
-    border-bottom: 1px solid var(--bd-main);
+    background: var(--bg-page);
     backdrop-filter: blur(8px);
+  }
+
+  .top-nav[data-page="/resume"] {
+    border-bottom: 1px solid var(--bd-subtle);
   }
 
   .nav-logo {
@@ -423,6 +495,69 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
   }
 
   .nav-icons a:hover { color: var(--accent); }
+
+  .nav-hamburger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--tx-1);
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.15s;
+  }
+
+  .nav-hamburger:hover { opacity: 0.75; }
+
+  .nav-mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-page);
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 50;
+    border-top: 1px solid var(--bd-subtle);
+  }
+
+  .nav-mobile-menu[hidden] { display: none; }
+  .nav-mobile-menu:not([hidden]) { display: flex; }
+
+  .nav-mobile-menu a {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.82rem;
+    color: var(--tx-2);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .nav-mobile-menu a:hover { background: var(--accent-bg); color: var(--accent); }
+  .nav-mobile-menu a.active { color: var(--accent); font-weight: 600; }
+
+  .nav-mobile-divider {
+    height: 1px;
+    background: var(--bd-subtle);
+    margin: 0.25rem 0;
+  }
+
+  .nav-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 49;
+  }
+
+  .nav-backdrop:not([hidden]) { display: block; }
+
+  @media (min-width: 601px) {
+    .nav-backdrop { display: none !important; }
+  }
 
   a:focus-visible,
   button:focus-visible {
@@ -553,6 +688,49 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     transform: scale(1.06);
   }
 
+  /* ── Footer ────────────────────────────────────── */
+  .site-footer {
+    background: var(--bg-page);
+    padding: 1rem 2.5rem;
+    margin-top: 0;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--tx-subtle);
+    margin: 0;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-nav, .footer-social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-nav a, .footer-social a {
+    font-size: 0.82rem;
+    color: var(--tx-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-nav a:hover, .footer-social a:hover { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--tx-subtle);
+    margin: 0;
+  }
+
   /* ── Responsive ─────────────────────────────────── */
   @media (max-width: 600px) {
     .top-nav {
@@ -560,10 +738,19 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     }
     .nav-links {
       gap: 1rem;
+      display: none;
     }
     .nav-icons {
+      display: none;
       padding-left: 0.75rem;
     }
+    .nav-hamburger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-footer { padding: 1.5rem 1.25rem; margin-top: 2rem; }
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   }
 
   @media (max-width: 480px) {
@@ -596,6 +783,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
   @media print {
     .top-nav { display: none !important; }
     .toolbar { display: none !important; }
+    .site-footer { display: none !important; }
     [data-animate] { opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 
