@@ -1,5 +1,5 @@
 # Block direct access to admin config
-/admin/config.yml  404
+/admin/config.yml 404!
 
 # Keep all other routes working
 /*  /:splat  200
