@@ -209,8 +209,8 @@ const canonicalPath = `/projects/${proj.slug}`;
 
   /* ── Hero thumbnail ──────────────────────────────── */
   .hero-thumb {
-    width: calc(100% + 28rem);
-    margin-left: -14rem;
+    width: calc(100% + 200px);
+    margin-left: -100px;
     border-radius: 14px;
     overflow: hidden;
     margin-bottom: 2.5rem;
@@ -281,13 +281,12 @@ const canonicalPath = `/projects/${proj.slug}`;
 
   /* ── Gallery ─────────────────────────────────────── */
   .gallery {
-    width: calc(100% + 28rem);
-    margin-left: -14rem;
     margin-bottom: 2.5rem;
   }
 
   .gallery-main {
-    width: 100%;
+    width: calc(100% + 200px);
+    margin-left: -100px;
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid var(--bd-card);
@@ -607,11 +606,7 @@ const canonicalPath = `/projects/${proj.slug}`;
 
   /* ── Responsive ─────────────────────────────────── */
   @media (max-width: 780px) {
-    .hero-thumb {
-      width: 100%;
-      margin-left: 0;
-    }
-    .gallery {
+    .hero-thumb, .gallery {
       width: 100%;
       margin-left: 0;
     }
