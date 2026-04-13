@@ -100,6 +100,10 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
         Projects
         {(path === "/projects" || path.startsWith("/projects/")) && <span class="nav-dot">•</span>}
       </a>
+      <a href="/blog" class={`nav-link${path === "/blog" || path.startsWith("/blog/") ? " active" : ""}`}>
+        Blog
+        {(path === "/blog" || path.startsWith("/blog/")) && <span class="nav-dot">•</span>}
+      </a>
       <a href="/resume" class={`nav-link${path === "/resume" ? " active" : ""}`}>
         Resume
         {path === "/resume" && <span class="nav-dot">•</span>}
@@ -122,6 +126,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
       <a href="/">Home</a>
       <a href="/about" class={path === "/about" ? "active" : ""}>About</a>
       <a href="/projects" class={path === "/projects" || path.startsWith("/projects/") ? "active" : ""}>Projects</a>
+      <a href="/blog" class={path === "/blog" || path.startsWith("/blog/") ? "active" : ""}>Blog</a>
       <a href="/resume" class={path === "/resume" ? "active" : ""}>Resume</a>
       <div class="nav-mobile-divider"></div>
       <a href="https://github.com/djchew" target="_blank" rel="noopener" aria-label="GitHub profile">GitHub</a>
