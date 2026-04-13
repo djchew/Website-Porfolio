@@ -53,7 +53,14 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', t);
       // Set background immediately to prevent light flash
-      var bg = t === 'dark' ? '#0f1923' : (t === 'grey' ? '#f0f0f0' : '#f5f3ee');
+      var bgMap = {
+        dark:     '#0f1923',
+        grey:     '#f0f0f0',
+        mono:     '#ffffff',
+        midnight: '#080808',
+        forest:   '#f5f3ee',
+      };
+      var bg = bgMap[t] || '#f5f3ee';
       document.documentElement.style.background = bg;
     })();
   </script>
@@ -85,6 +92,10 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
   <nav class="top-nav" data-page={path} aria-label="Main">
     <a href="/" class="nav-logo">Darrell Chew</a>
     <div class="nav-links">
+      <a href="/about" class={`nav-link${path === "/about" ? " active" : ""}`}>
+        About
+        {path === "/about" && <span class="nav-dot">•</span>}
+      </a>
       <a href="/projects" class={`nav-link${path === "/projects" || path.startsWith("/projects/") ? " active" : ""}`}>
         Projects
         {(path === "/projects" || path.startsWith("/projects/")) && <span class="nav-dot">•</span>}
@@ -109,6 +120,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     </button>
     <div class="nav-mobile-menu" id="nav-mobile-menu" hidden>
       <a href="/">Home</a>
+      <a href="/about" class={path === "/about" ? "active" : ""}>About</a>
       <a href="/projects" class={path === "/projects" || path.startsWith("/projects/") ? "active" : ""}>Projects</a>
       <a href="/resume" class={path === "/resume" ? "active" : ""}>Resume</a>
       <div class="nav-mobile-divider"></div>
@@ -152,6 +164,33 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
           <span class="opt-body">
             <span class="opt-name">Grey</span>
             <span class="opt-desc">Clean &amp; neutral</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <button class="theme-opt" data-t="mono">
+          <span class="swatch" style="background:#ffffff;border-color:#0a0a0a"></span>
+          <span class="opt-body">
+            <span class="opt-name">Mono</span>
+            <span class="opt-desc">Black &amp; white</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <button class="theme-opt" data-t="midnight">
+          <span class="swatch" style="background:#080808;border-color:#3a3a3a"></span>
+          <span class="opt-body">
+            <span class="opt-name">Midnight</span>
+            <span class="opt-desc">Pure black</span>
+          </span>
+          <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <button class="theme-opt" data-t="forest">
+          <span class="swatch" style="background:#f5f3ee;border-color:#166534"></span>
+          <span class="opt-body">
+            <span class="opt-name">Forest</span>
+            <span class="opt-desc">Natural &amp; green</span>
           </span>
           <svg class="opt-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </button>
@@ -272,6 +311,15 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
       });
     }
 
+    // ── Frosted glass nav on scroll ────────────────────
+    function initScrollNav() {
+      const nav = document.querySelector('.top-nav') as HTMLElement | null;
+      if (!nav) return;
+      const handler = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+      window.addEventListener('scroll', handler, { passive: true });
+      handler();
+    }
+
     // ── Init on first load and after each page transition ──
     function init() {
       const theme = localStorage.getItem('dc-theme') ||
@@ -280,6 +328,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
       initSettingsPanel();
       initAnimations();
       initHamburger();
+      initScrollNav();
 
       // Email obfuscation for footer
       const u = 'darrellchew';
@@ -305,6 +354,8 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     flex-direction: column;
     min-height: 100vh;
     background: var(--bg-page);
+    background-image: var(--grad-mesh);
+    background-attachment: fixed;
     color: var(--tx-1);
   }
   h1 { font-family: 'Playfair Display', serif; }
@@ -357,6 +408,17 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     --panel-bg:   #ffffff;
     --panel-bd:   #e0ddd6;
     --shadow:     rgba(0,0,0,0.08);
+    --grad-text:       linear-gradient(135deg, #1e5f8e 0%, #0e3d5c 50%, #2a4f8f 100%);
+    --grad-accent:     linear-gradient(135deg, #1e5f8e 0%, #2a4f8f 100%);
+    --grad-mesh:       radial-gradient(ellipse 80% 60% at 20% 40%, rgba(30,95,142,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%, rgba(42,79,143,0.07) 0%, transparent 55%), radial-gradient(ellipse 50% 50% at 50% 0%, rgba(30,95,142,0.05) 0%, transparent 60%);
+    --grad-card-hover: linear-gradient(135deg, rgba(30,95,142,0.04) 0%, rgba(42,79,143,0.07) 100%);
+    --skill-expert-bg:    #dbeafe;
+    --skill-expert-color: #1e40af;
+    --skill-inter-bg:     #dcfce7;
+    --skill-inter-color:  #15803d;
+    --nav-circle-bg:      #d4ff1a;
+    --nav-circle-icon:    #1a1a1a;
+    --nav-circle-glow:    rgba(212, 255, 26, 0.4);
   }
 
   [data-theme="dark"] {
@@ -385,6 +447,17 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     --panel-bg:   #112030;
     --panel-bd:   #1e3a55;
     --shadow:     rgba(0,0,0,0.45);
+    --grad-text:       linear-gradient(135deg, #60b4f0 0%, #93c5fd 100%);
+    --grad-accent:     linear-gradient(135deg, #60b4f0 0%, #3b82f6 100%);
+    --grad-mesh:       radial-gradient(ellipse 80% 60% at 20% 40%, rgba(96,180,240,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%, rgba(59,130,246,0.07) 0%, transparent 55%), radial-gradient(ellipse 50% 50% at 50% 0%, rgba(96,180,240,0.05) 0%, transparent 60%);
+    --grad-card-hover: linear-gradient(135deg, rgba(96,180,240,0.04) 0%, rgba(59,130,246,0.07) 100%);
+    --skill-expert-bg:    #0f2d4a;
+    --skill-expert-color: #7ec8f4;
+    --skill-inter-bg:     #052e16;
+    --skill-inter-color:  #86efac;
+    --nav-circle-bg:      #d4ff1a;
+    --nav-circle-icon:    #1a1a1a;
+    --nav-circle-glow:    rgba(212, 255, 26, 0.6);
   }
 
   [data-theme="grey"] {
@@ -413,6 +486,71 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     --panel-bg:   #ffffff;
     --panel-bd:   #d0d0d0;
     --shadow:     rgba(0,0,0,0.06);
+    --grad-text:       linear-gradient(135deg, #1e5f8e 0%, #374151 100%);
+    --grad-accent:     linear-gradient(135deg, #1e5f8e 0%, #374151 100%);
+    --grad-mesh:       radial-gradient(ellipse 80% 60% at 20% 40%, rgba(30,95,142,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%, rgba(55,65,81,0.05) 0%, transparent 55%), radial-gradient(ellipse 50% 50% at 50% 0%, rgba(30,95,142,0.04) 0%, transparent 60%);
+    --grad-card-hover: linear-gradient(135deg, rgba(30,95,142,0.03) 0%, rgba(55,65,81,0.05) 100%);
+    --skill-expert-bg:    #d8e8f5;
+    --skill-expert-color: #1e5f8e;
+    --skill-inter-bg:     #dcfce7;
+    --skill-inter-color:  #15803d;
+    --nav-circle-bg:      #d4ff1a;
+    --nav-circle-icon:    #1a1a1a;
+    --nav-circle-glow:    rgba(212, 255, 26, 0.4);
+  }
+
+  [data-theme="mono"] {
+    --bg-page:#ffffff; --bg-sidebar:#f7f7f7; --bg-card:#ffffff;
+    --bd-main:#cccccc; --bd-subtle:#e0e0e0; --bd-card:#e0e0e0; --bd-accent:#aaaaaa;
+    --tx-1:#0a0a0a; --tx-2:#222222; --tx-3:#444444; --tx-muted:#666666; --tx-subtle:#888888;
+    --accent:#0a0a0a; --accent-bg:#f0f0f0;
+    --tag-bg:#f0f0f0; --tag-color:#0a0a0a;
+    --pill-bg:#e8e8e8; --icon-bg:#f0f0f0; --icon-muted:#e8e8e8;
+    --avatar-bg:#0a0a0a; --avatar-fg:#ffffff;
+    --scrollbar:#cccccc; --panel-bg:#ffffff; --panel-bd:#e0e0e0; --shadow:rgba(0,0,0,0.10);
+    --grad-text:linear-gradient(135deg,#0a0a0a 0%,#333333 100%);
+    --grad-accent:linear-gradient(135deg,#0a0a0a 0%,#333333 100%);
+    --grad-mesh:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(0,0,0,0.04) 0%,transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%,rgba(0,0,0,0.03) 0%,transparent 55%);
+    --grad-card-hover:linear-gradient(135deg,rgba(0,0,0,0.03) 0%,rgba(0,0,0,0.05) 100%);
+    --skill-expert-bg:#e8e8e8; --skill-expert-color:#0a0a0a;
+    --skill-inter-bg:#f0f0f0; --skill-inter-color:#333333;
+    --nav-circle-bg:#d4ff1a; --nav-circle-icon:#1a1a1a; --nav-circle-glow:rgba(212, 255, 26, 0.4);
+  }
+
+  [data-theme="midnight"] {
+    --bg-page:#080808; --bg-sidebar:#0f0f0f; --bg-card:#111111;
+    --bd-main:#2a2a2a; --bd-subtle:#1e1e1e; --bd-card:#2a2a2a; --bd-accent:#3a3a3a;
+    --tx-1:#f5f5f5; --tx-2:#c8c8c8; --tx-3:#a0a0a0; --tx-muted:#6e6e6e; --tx-subtle:#555555;
+    --accent:#e2e2e2; --accent-bg:#1a1a1a;
+    --tag-bg:#1e1e1e; --tag-color:#c8c8c8;
+    --pill-bg:#1e1e1e; --icon-bg:#1e1e1e; --icon-muted:#151515;
+    --avatar-bg:#2a2a2a; --avatar-fg:#f5f5f5;
+    --scrollbar:#2a2a2a; --panel-bg:#111111; --panel-bd:#2a2a2a; --shadow:rgba(0,0,0,0.6);
+    --grad-text:linear-gradient(135deg,#ffffff 0%,#c8c8c8 100%);
+    --grad-accent:linear-gradient(135deg,#e2e2e2 0%,#999999 100%);
+    --grad-mesh:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(255,255,255,0.04) 0%,transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%,rgba(255,255,255,0.03) 0%,transparent 55%);
+    --grad-card-hover:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.05) 100%);
+    --skill-expert-bg:#1e1e1e; --skill-expert-color:#e2e2e2;
+    --skill-inter-bg:#151515; --skill-inter-color:#a0a0a0;
+    --nav-circle-bg:#d4ff1a; --nav-circle-icon:#1a1a1a; --nav-circle-glow:rgba(212, 255, 26, 0.8);
+  }
+
+  [data-theme="forest"] {
+    --bg-page:#f5f3ee; --bg-sidebar:#eae8e2; --bg-card:#ffffff;
+    --bd-main:#c8c4b0; --bd-subtle:#e0ddd2; --bd-card:#dedad0; --bd-accent:#a8cbb0;
+    --tx-1:#111111; --tx-2:#2d3a2d; --tx-3:#4a5e4a; --tx-muted:#6b7e6b; --tx-subtle:#8a9e8a;
+    --accent:#166534; --accent-bg:#f0fdf4;
+    --tag-bg:#dcfce7; --tag-color:#166534;
+    --pill-bg:#e2e8e2; --icon-bg:#dcfce7; --icon-muted:#e8ede8;
+    --avatar-bg:#166534; --avatar-fg:#ffffff;
+    --scrollbar:#b0c8b0; --panel-bg:#ffffff; --panel-bd:#d0ddd0; --shadow:rgba(0,0,0,0.08);
+    --grad-text:linear-gradient(135deg,#166534 0%,#14532d 50%,#052e16 100%);
+    --grad-accent:linear-gradient(135deg,#166534 0%,#052e16 100%);
+    --grad-mesh:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(22,101,52,0.10) 0%,transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%,rgba(5,46,22,0.07) 0%,transparent 55%), radial-gradient(ellipse 50% 50% at 50% 0%,rgba(22,101,52,0.05) 0%,transparent 60%);
+    --grad-card-hover:linear-gradient(135deg,rgba(22,101,52,0.04) 0%,rgba(5,46,22,0.07) 100%);
+    --skill-expert-bg:#dcfce7; --skill-expert-color:#166534;
+    --skill-inter-bg:#dbeafe; --skill-inter-color:#1e40af;
+    --nav-circle-bg:#d4ff1a; --nav-circle-icon:#1a1a1a; --nav-circle-glow:rgba(212, 255, 26, 0.4);
   }
 
   /* ── Scroll animations ──────────────────────────── */
@@ -439,9 +577,18 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     backdrop-filter: blur(8px);
   }
 
-  .top-nav[data-page="/resume"],
-  .top-nav[data-page="/projects"] {
-    border-bottom: 1px solid var(--bd-subtle);
+  .top-nav {
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .top-nav.scrolled {
+    background: color-mix(in srgb, var(--bg-page) 98%, var(--accent) 2%);
+  }
+
+  @supports not (color: color-mix(in srgb, red, blue)) {
+    .top-nav.scrolled {
+      background: var(--bg-page);
+    }
   }
 
   .nav-logo {
@@ -527,7 +674,6 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     flex-direction: column;
     gap: 0.5rem;
     z-index: 50;
-    border-top: 1px solid var(--bd-subtle);
   }
 
   .nav-mobile-menu[hidden] { display: none; }
@@ -798,6 +944,7 @@ const socialImageUrl = toAbsoluteUrl(ogImage);
     .toolbar { display: none !important; }
     .site-footer { display: none !important; }
     [data-animate] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    h1 { -webkit-text-fill-color: #000 !important; background: none !important; }
   }
 
   @media (prefers-reduced-motion: reduce) {

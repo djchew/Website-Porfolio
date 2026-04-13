@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resume from '../data/resume.json';
+
+const { name, summary, skills, profile_picture } = resume;
+const pageDescription = "About Darrell Chew — analytics engineer based in Melbourne. Background, skills, and selected projects.";
+---
+
+<Layout
+  title={`About - ${name}`}
+  path="/about"
+  canonicalPath="/about"
+  description={pageDescription}
+  ogType="profile"
+>
+  <div class="about-page">
+
+    <!-- PAGE HEADER -->
+    <header class="page-header" data-animate>
+      <h1 class="page-title">About</h1>
+    </header>
+
+    <!-- INTRO SECTION -->
+    <section class="intro-section" data-animate>
+      <div class="intro-text">
+        <p class="intro-body">{summary}</p>
+        <p class="intro-philosophy">I'm a systems thinker who builds for production. I care about data quality first, then speed. I thrive in ambiguous problems where the data tells a story — and I believe good analysis should need no explanation.</p>
+      </div>
+      <div class="intro-photo">
+        <img src={profile_picture ?? '/profile.jpg'} alt={name} width="200" height="200" />
+      </div>
+    </section>
+
+    <!-- PROJECTS APPROACH SECTION -->
+    <section class="approach-section" data-animate>
+      <p class="approach-text">My project work centers on rigorous data analysis and end-to-end data science processes. I design data pipelines that prioritize quality and reliability, build dashboards that translate complexity into insight, and develop full-stack data products that solve real business problems. Each project reflects my belief that good analysis requires clean data, sound methodology, and clear communication—turning raw information into decisions that matter.</p>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills-section" data-animate>
+      <h2 class="section-heading">Skills</h2>
+      <div class="skills-groups">
+        {Object.entries(skills).map(([group, items]) => (
+          <div class="skill-group">
+            <p class="skill-group-label">{group}</p>
+            <div class="skill-tags">
+              {(items as { name: string; level: string }[]).map(skill => (
+                <span class={`skill-tag skill-tag--${skill.level}`}>{skill.name}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    min-height: 100vh;
+    background: var(--bg-page);
+    color: var(--tx-1);
+  }
+
+  /* ── Page header ─────────────────────────────────── */
+  .page-header {
+    padding: 3rem 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--tx-1);
+    margin-bottom: 0.35rem;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Intro section ───────────────────────────────── */
+  .intro-section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+  }
+
+  .intro-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--tx-2);
+    margin-bottom: 1rem;
+  }
+
+  .intro-philosophy {
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--tx-3);
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .intro-photo img {
+    width: 160px;
+    height: 160px;
+    border-radius: 16px;
+    object-fit: cover;
+    border: 2px solid var(--bd-card);
+    box-shadow: 0 8px 24px var(--shadow);
+    display: block;
+  }
+
+  /* ── Approach section ────────────────────────────── */
+  .approach-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+  }
+
+  .approach-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--tx-2);
+    margin: 0;
+  }
+
+  /* ── Skills section ──────────────────────────────── */
+  .skills-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--tx-1);
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .skill-group-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tx-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    transition: opacity 0.15s, background 0.2s, color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .skill-tag:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .skill-tag--expert {
+    font-weight: 600;
+    background: var(--skill-expert-bg);
+    color: var(--skill-expert-color);
+  }
+
+  .skill-tag--intermediate {
+    background: var(--skill-inter-bg);
+    color: var(--skill-inter-color);
+  }
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 600px) {
+    .intro-section {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1.25rem 2rem;
+    }
+
+    .intro-photo {
+      order: -1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .intro-photo img {
+      width: 120px;
+      height: 120px;
+    }
+
+    .approach-section {
+      padding: 0 1.25rem 1.5rem;
+    }
+
+    .approach-text {
+      margin: 1.5rem 0;
+    }
+
+    .skills-section {
+      padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .page-header {
+      padding: 2rem 1.25rem 1.25rem;
+    }
+
+    .about-cta {
+      margin: 0 1.25rem 2rem;
+      padding: 1.5rem;
+    }
+  }
+</style>

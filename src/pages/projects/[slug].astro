@@ -205,6 +205,8 @@ const canonicalPath = `/projects/${proj.slug}`;
     margin: 0 auto;
     padding: 3rem 2rem 5rem;
     overflow-x: hidden;
+    background-image: var(--grad-mesh);
+    background-attachment: fixed;
   }
 
   /* ── Hero thumbnail ──────────────────────────────── */
@@ -378,9 +380,12 @@ const canonicalPath = `/projects/${proj.slug}`;
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--tx-1);
     line-height: 1.2;
     margin-bottom: 0.6rem;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .proj-desc {

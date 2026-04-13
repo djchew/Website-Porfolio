@@ -3,13 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import resume from '../data/resume.json';
 
-const { name, github, linkedin, summary, skills, experience } = resume;
+const { name, github, linkedin } = resume;
 const jobTitle = "Data Analyst";
 const projects = await getCollection('projects');
 const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in Melbourne building data pipelines, dashboards, and analytics products.";
-
-// Collect all skills and flatten them
-const allSkills = Object.values(skills).flat() as { name: string; level: string }[];
 ---
 
 <Layout
@@ -24,70 +21,78 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="hero-grid"></div>
-      <div class="hero-content">
-        <h1>{name}</h1>
-        <p class="hero-title">{jobTitle}</p>
-        <p class="hero-tagline">Turning raw data into decisions.</p>
-        <p class="hero-stat">85% ETL runtime reduction · 3+ yrs enterprise data · Telstra</p>
-        <span class="availability-chip">Open to new opportunities · Melbourne + Remote</span>
-        <div class="hero-socials">
-          <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          </a>
-          <a href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn profile">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a id="email-link" href="#" aria-label="Send email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </a>
+      <div class="hero-split">
+
+        <!-- LEFT: text -->
+        <div class="hero-content">
+          <p class="hero-greeting">Hi, I'm</p>
+          <h1>{name}</h1>
+          <p class="hero-title">{jobTitle} · Melbourne</p>
+          <p class="hero-tagline">Turning raw data into decisions.</p>
+          <span class="availability-chip">Open to new opportunities · Remote + Onsite</span>
+          <div class="hero-ctas">
+            <a class="cta-btn cta-primary" href="https://linkedin.com/in/darrell-chew" target="_blank" rel="noopener">Hire Me</a>
+            <a class="cta-btn cta-secondary" href="/projects">View Work</a>
+          </div>
+          <div class="hero-socials">
+            <a href={`https://github.com/${github}`} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href={`https://linkedin.com/in/${linkedin}`} target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn profile">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a id="email-link" href="#" aria-label="Send email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
         </div>
-        <div class="scroll-indicator">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
+
+        <!-- RIGHT: photo -->
+        <div class="hero-photo">
+          <div class="hero-photo-ring">
+            <img src="/profile.jpg" alt="Darrell Chew" width="480" height="480" />
+          </div>
+        </div>
+
+      </div>
+      <div class="scroll-indicator">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- NAV CIRCLES -->
+    <section class="nav-circles">
+      <a href="/about" class="nav-node">
+        <div class="nav-circle">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about">
-      <div class="about-inner">
-        <span class="about-label">About</span>
-        <p class="about-text">{summary}</p>
-        <p class="about-philosophy">I'm a systems thinker who builds for production. I care about data quality first, then speed. I thrive in ambiguous problems where the data tells a story — and I believe good analysis should need no explanation.</p>
-      </div>
-    </section>
-
-    <!-- SKILLS CLOUD -->
-    <section class="skills-section">
-      <div class="skills-cloud">
-        {allSkills.map(skill => {
-          const randomOpacity = Math.random() * 0.25 + 0.75; // 0.75 to 1.0
-          return (
-            <span class={`skill-tag skill-tag--${skill.level}`} style={`--skill-opacity: ${randomOpacity}`} data-level={skill.level}>
-              {skill.level === 'expert' ? '• ' : ''}{skill.name}
-            </span>
-          );
-        })}
-      </div>
-    </section>
-
-    <!-- SECTION CARDS -->
-    <section class="cards-section">
-      <div class="cards-grid">
-        <a href="/projects" class="section-card">
-          <div class="card-content">
-            <h2>Projects →</h2>
-            <p>{projects.length} projects built</p>
-          </div>
-        </a>
-        <a href="/resume" class="section-card">
-          <div class="card-content">
-            <h2>Resume →</h2>
-            <p>Experience & background</p>
-          </div>
-        </a>
-      </div>
+        <span class="nav-label">About</span>
+      </a>
+      <a href="/projects" class="nav-node">
+        <div class="nav-circle">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+            <path d="M17 5H9.5a1.5 1.5 0 0 0 0 3h5a1.5 1.5 0 0 1 0 3h-5a1.5 1.5 0 0 0 0 3H17"></path>
+          </svg>
+        </div>
+        <span class="nav-label">Projects</span>
+      </a>
+      <a href="/resume" class="nav-node">
+        <div class="nav-circle">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="13" x2="12" y2="17"></line>
+            <line x1="10" y1="15" x2="14" y2="15"></line>
+          </svg>
+        </div>
+        <span class="nav-label">Resume</span>
+      </a>
     </section>
 
   </div>
@@ -97,12 +102,15 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
   .homepage {
     background: var(--bg-page);
     color: var(--tx-1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* ── Hero ────────────────────────────────────────── */
   .hero {
     position: relative;
-    min-height: 75svh;
+    min-height: 60svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,12 +130,23 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
 
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1100px;
+    width: 100%;
+    padding: 4rem 2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
   .hero-content {
     position: relative;
     z-index: 10;
-    text-align: center;
-    max-width: 600px;
-    padding: 2rem;
+    text-align: left;
+    padding: 0;
   }
 
   .hero-content h1 {
@@ -135,6 +154,10 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 0.5rem;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .hero-title {
@@ -151,12 +174,49 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     margin-bottom: 2rem;
   }
 
-  .hero-stat {
-    font-size: 0.85rem;
+  .hero-greeting {
+    font-size: 1.2rem;
     color: var(--tx-3);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    letter-spacing: 0.02em;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: opacity 0.15s, background 0.15s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .cta-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .cta-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .cta-secondary:hover {
+    background: var(--accent-bg);
+    transform: translateY(-2px);
   }
 
   .availability-chip {
@@ -168,15 +228,38 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     color: var(--accent);
     border: 1px solid var(--bd-accent);
     border-radius: 999px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     letter-spacing: 0.01em;
+  }
+
+  /* Photo column */
+  .hero-photo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-photo-ring {
+    width: min(420px, 100%);
+    aspect-ratio: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 2px solid var(--bd-card);
+    box-shadow: 0 16px 48px var(--shadow);
+  }
+
+  .hero-photo-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .hero-socials {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.75rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
   }
 
   .hero-socials a {
@@ -185,19 +268,21 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: var(--tx-2);
-    border: 1px solid var(--bd-subtle);
+    color: var(--tx-3);
+    border: none;
+    background: transparent;
     border-radius: 8px;
-    transition: color 0.15s, border-color 0.15s;
+    transition: color 0.2s, background 0.2s, transform 0.15s;
   }
 
   .hero-socials a:hover {
     color: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-bg);
+    transform: translateY(-2px);
   }
 
   .scroll-indicator {
-    display: flex;
+    display: none;
     justify-content: center;
     color: var(--tx-muted);
     animation: bob 2s ease-in-out infinite;
@@ -208,143 +293,83 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
     50% { transform: translateY(8px); }
   }
 
-  /* ── About ───────────────────────────────────────── */
-  .about {
-    padding: 0 2rem 4rem;
-    background: var(--bg-page);
-  }
-
-  .about-inner {
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .about-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.8;
-    color: var(--tx-2);
-    margin-bottom: 1.5rem;
-  }
-
-  .about-meta {
+  /* ── Nav Circles ────────────────────────────────────── */
+  .nav-circles {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 2rem 0;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  .nav-node {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
-  }
-
-  .about-inner {
-    text-align: center;
-  }
-
-  .about-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--tx-subtle);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .about-philosophy {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.8;
-    color: var(--tx-3);
-    margin-top: 1.25rem;
-  }
-
-  /* ── Skills Cloud ────────────────────────────────── */
-  .skills-section {
-    padding: 3rem 2rem;
-    border-top: 1px solid var(--bd-subtle);
-    border-bottom: 1px solid var(--bd-subtle);
-  }
-
-  .skills-cloud {
-    max-width: 760px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-    justify-content: center;
-  }
-
-  .skill-tag {
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 0.35rem 0.7rem;
-    border-radius: 999px;
-    background: var(--tag-bg);
-    color: var(--tag-color);
-    opacity: var(--skill-opacity, 0.7);
-    transition: opacity 0.15s;
-  }
-
-  .skill-tag:hover {
-    opacity: 1;
-  }
-
-  .skill-tag--expert {
-    font-weight: 600;
-  }
-
-  /* ── Section Cards ───────────────────────────────── */
-  .cards-section {
-    padding: 4rem 2rem;
-  }
-
-  .cards-grid {
-    max-width: 760px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .section-card {
-    padding: 2rem;
-    border: 1px solid var(--bd-card);
-    border-radius: 12px;
-    background: var(--bg-card);
+    gap: 1rem;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .nav-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--nav-circle-bg);
+    border: 2px solid var(--nav-circle-bg);
     display: flex;
     align-items: center;
+    justify-content: center;
+    color: var(--nav-circle-icon);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .section-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 4px 16px var(--shadow);
-    transform: translateY(-2px);
+  .nav-node:hover .nav-circle {
+    transform: scale(1.08);
+    box-shadow: 0 0 24px var(--nav-circle-glow);
   }
 
-  .card-content {
-    width: 100%;
-  }
-
-  .section-card h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  .nav-label {
     font-family: 'Playfair Display', serif;
-  }
-
-  .section-card p {
-    font-size: 0.85rem;
-    color: var(--tx-3);
-    line-height: 1.5;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tx-1);
+    text-align: center;
+    min-width: 100px;
   }
 
   /* ── Responsive ──────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-ctas {
+      justify-content: center;
+    }
+
+    .hero-socials {
+      justify-content: center;
+    }
+
+    .hero-photo {
+      order: -1;
+    }
+
+    .hero-photo-ring {
+      width: min(280px, 80%);
+    }
+  }
+
   @media (max-width: 600px) {
     .hero-content h1 {
       font-size: 2.5rem;
@@ -354,30 +379,18 @@ const allSkills = Object.values(skills).flat() as { name: string; level: string 
       font-size: 1rem;
     }
 
-    .about {
-      padding: 0 1.25rem 2rem;
+    .nav-circles {
+      padding: 1.5rem 1.25rem 0;
+      gap: 2rem;
     }
 
-    .about-text {
-      font-size: 0.95rem;
+    .nav-circle {
+      width: 90px;
+      height: 90px;
     }
 
-    .skills-section {
-      padding: 1.5rem 1.25rem;
-    }
-
-    .cards-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cards-section {
-      padding: 2rem 1.25rem;
-    }
-
-    .about-meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+    .nav-label {
+      font-size: 0.9rem;
     }
   }
 </style>

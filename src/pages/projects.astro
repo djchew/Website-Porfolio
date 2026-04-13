@@ -20,8 +20,14 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
 
     <!-- HEADER -->
     <header class="page-header" data-animate>
-      <h1 class="page-title">Projects</h1>
-      <p class="page-subtitle">End-to-end data projects — pipelines, dashboards, and analysis</p>
+      <div class="page-header-text">
+        <h1 class="page-title">Projects</h1>
+        <p class="page-subtitle">End-to-end data projects — pipelines, dashboards, and analysis</p>
+      </div>
+      <div class="page-header-badge">
+        <span class="badge-stat">{projects.length}</span>
+        <span class="badge-label">projects built</span>
+      </div>
     </header>
 
     <!-- GRID -->
@@ -93,8 +99,17 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
   /* ── Page header ─────────────────────────────────── */
   .page-header {
     padding: 3rem 2rem 1.5rem;
-    border-bottom: 1px solid var(--bd-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-bottom: 2.5rem;
+  }
+
+  .page-header-text {
+    flex: 1;
+    min-width: 280px;
   }
 
   .page-title {
@@ -103,11 +118,40 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     font-weight: 700;
     color: var(--tx-1);
     margin-bottom: 0.35rem;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .page-subtitle {
     font-size: 0.9rem;
     color: var(--tx-muted);
+  }
+
+  .page-header-badge {
+    background: var(--bg-card);
+    border: 1px solid var(--bd-card);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .page-header-badge .badge-stat {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .page-header-badge .badge-label {
+    font-size: 0.65rem;
+    color: var(--tx-muted);
+    line-height: 1.4;
   }
 
   /* ── Grid ────────────────────────────────────────── */
@@ -122,6 +166,7 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
 
   /* ── Card ────────────────────────────────────────── */
   .card {
+    position: relative;
     background: var(--bg-card);
     border: 1px solid var(--bd-card);
     border-radius: 12px;
@@ -133,10 +178,26 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
   }
 
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: var(--grad-card-hover);
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card:not(.cta-card):hover::after {
+    opacity: 1;
+  }
+
   .card:not(.placeholder):hover {
-    box-shadow: 0 6px 24px var(--shadow);
-    border-color: var(--bd-accent);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--shadow), 0 2px 8px var(--shadow);
+    border-color: var(--accent);
+    transform: translateY(-3px);
   }
 
   .placeholder {
@@ -147,6 +208,8 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
 
   /* ── Thumbnail ───────────────────────────────────── */
   .card-thumb {
+    position: relative;
+    z-index: 1;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
@@ -180,6 +243,8 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
 
   /* ── Card body ───────────────────────────────────── */
   .card-body {
+    position: relative;
+    z-index: 1;
     padding: 1.25rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -221,8 +286,8 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     font-size: 0.74rem;
     line-height: 1.5;
     color: var(--tx-2);
-    border-left: 2px solid var(--bd-accent);
-    padding-left: 0.5rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.6rem;
   }
 
   .card-desc.muted { color: var(--tx-subtle); }
@@ -240,6 +305,14 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     border-radius: 999px;
     background: var(--tag-bg);
     color: var(--tag-color);
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .tag:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-1px);
   }
 
   .card-link {
@@ -254,15 +327,42 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
 
   /* ── CTA Card ──────────────────────────────────────── */
   .cta-card {
-    background: transparent;
-    border: 2px dashed var(--bd-card);
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--bd-card);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 280px;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  }
+
+  .cta-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: var(--grad-card-hover);
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cta-card:hover {
+    box-shadow: 0 8px 32px var(--shadow), 0 2px 8px var(--shadow);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .cta-card:hover::after {
+    opacity: 1;
   }
 
   .cta-body {
+    position: relative;
+    z-index: 1;
     padding: 2rem;
     text-align: center;
     gap: 1rem;
@@ -354,5 +454,22 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     const d = 'hotmail.com';
     const link = document.getElementById('cta-email') as HTMLAnchorElement;
     if (link) link.href = 'mailto:' + u + '@' + d;
+
+    // Card tilt effect
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    document.querySelectorAll<HTMLElement>('.card:not(.cta-card)').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg) translateY(-3px)`;
+      }, { passive: true });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
   });
 </script>

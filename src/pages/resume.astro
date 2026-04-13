@@ -186,13 +186,14 @@ const pageDescription = `${name} resume: ${jobTitle} in ${location}. Experience,
     grid-template-columns: 300px 1fr;
     min-height: 100vh;
     background: var(--bg-page);
+    background-image: var(--grad-mesh);
     color: var(--tx-1);
   }
 
   /* ── Sidebar ─────────────────────────────────────── */
   .sidebar {
-    background: var(--bg-page);
-    border-right: none;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--bd-subtle);
     padding: 2.5rem 1.75rem;
     position: sticky;
     top: 0;
@@ -213,15 +214,18 @@ const pageDescription = `${name} resume: ${jobTitle} in ${location}. Experience,
     letter-spacing: 0.02em;
     margin-bottom: 1rem;
     object-fit: cover;
-    box-shadow: 0 2px 8px rgba(30, 95, 142, 0.2);
+    box-shadow: 0 0 0 2px var(--accent), 0 2px 8px var(--shadow);
   }
 
   .name {
     font-size: 1.45rem;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--tx-1);
     margin-bottom: 0.2rem;
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .job-title {
@@ -273,25 +277,23 @@ const pageDescription = `${name} resume: ${jobTitle} in ${location}. Experience,
   .sidebar-section { margin-bottom: 1.5rem; }
 
   .download-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 0.6rem 0.75rem;
+    gap: 0.4rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #fff;
-    background: var(--accent);
     border: 1px solid var(--accent);
-    border-radius: 8px;
     text-decoration: none;
-    transition: background 0.15s, color 0.15s;
+    transition: opacity 0.15s, transform 0.15s;
   }
 
   .download-btn:hover {
-    background: var(--accent-hover, var(--accent));
-    opacity: 0.9;
+    opacity: 0.88;
+    transform: translateY(-2px);
   }
 
   .label {
@@ -333,6 +335,13 @@ const pageDescription = `${name} resume: ${jobTitle} in ${location}. Experience,
 
   .tag--expert {
     font-weight: 600;
+    background: var(--skill-expert-bg);
+    color: var(--skill-expert-color);
+  }
+
+  .tag--intermediate {
+    background: var(--skill-inter-bg);
+    color: var(--skill-inter-color);
   }
 
   /* ── Main ────────────────────────────────────────── */
@@ -468,6 +477,13 @@ const pageDescription = `${name} resume: ${jobTitle} in ${location}. Experience,
     display: flex;
     gap: 1.2rem;
     align-items: baseline;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .pos-item:hover {
+    background: var(--accent-bg);
   }
 
   .pos-label {
