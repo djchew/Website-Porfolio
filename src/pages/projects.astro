@@ -31,7 +31,7 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
     </header>
 
     <!-- GRID -->
-    <section class="grid">
+    <section class="grid" id="projects-grid">
       {projects.map((proj, i) => (
         <a
           class="card"
@@ -57,7 +57,7 @@ const pageDescription = "Portfolio projects by Darrell Chew covering analytics e
             <h2 class="card-name">{proj.data.name}</h2>
             <p class="card-desc">{proj.data.description}</p>
             {proj.data.outcomes?.[0] && (
-              <p class="card-outcome">{proj.data.outcomes[0]}</p>
+              <p class="card-outcome">✓ {proj.data.outcomes[0]}</p>
             )}
             <div class="card-tags">
               {proj.data.tags.map(tag => <span class="tag">{tag}</span>)}
