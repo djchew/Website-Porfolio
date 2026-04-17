@@ -53,6 +53,10 @@ const pageDescription = "About Darrell Chew — analytics engineer based in Melb
       </div>
     </section>
 
+    <!-- PROCESS SECTION -->
+    <section class="process-section" data-animate>
+      <p class="process-text">I use modern development tools—including Claude and other AI assistants—to accelerate implementation and reduce boilerplate work. Architecture decisions, data modeling, design direction, and all strategic choices are mine. Tools handle the grunt work; I own the thinking.</p>
+    </section>
 
   </div>
 </Layout>
@@ -197,6 +201,22 @@ const pageDescription = "About Darrell Chew — analytics engineer based in Melb
     color: var(--skill-inter-color);
   }
 
+  /* ── Process section ─────────────────────────────── */
+  .process-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    border-top: 1px solid var(--bd-subtle);
+  }
+
+  .process-text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--tx-3);
+    margin: 0;
+    font-style: italic;
+  }
+
   /* ── Responsive ──────────────────────────────────── */
   @media (max-width: 600px) {
     .intro-section {
@@ -226,6 +246,10 @@ const pageDescription = "About Darrell Chew — analytics engineer based in Melb
 
     .skills-section {
       padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .process-section {
+      padding: 2rem 1.25rem;
     }
 
     .page-header {

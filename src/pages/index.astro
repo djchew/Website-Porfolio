@@ -6,6 +6,7 @@ import resume from '../data/resume.json';
 const { name, github, linkedin } = resume;
 const jobTitle = "Data Analyst";
 const projects = await getCollection('projects');
+const featuredProject = projects.find(p => p.slug === 'melbourne-liveability');
 const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in Melbourne building data pipelines, dashboards, and analytics products.";
 ---
 
@@ -61,6 +62,39 @@ const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in M
         </svg>
       </div>
     </section>
+
+    <!-- FEATURED PROJECT -->
+    {featuredProject && (
+      <section class="featured-project" data-animate>
+        <div class="featured-content">
+          <div class="featured-text">
+            <span class="featured-label">Featured work</span>
+            <h2 class="featured-title">{featuredProject.data.name}</h2>
+            <p class="featured-description">{featuredProject.data.description}</p>
+            {featuredProject.data.outcomes && featuredProject.data.outcomes[0] && (
+              <p class="featured-outcome">
+                <span class="outcome-check">✓</span>
+                {featuredProject.data.outcomes[0]}
+              </p>
+            )}
+            <div class="featured-tags">
+              {featuredProject.data.tags.slice(0, 4).map(tag => <span class="tag">{tag}</span>)}
+            </div>
+            <a href={`/projects/${featuredProject.slug}`} class="featured-link">
+              View project
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </a>
+          </div>
+          <div class="featured-image">
+            {featuredProject.data.image && (
+              <img src={featuredProject.data.image} alt={featuredProject.data.name} loading="lazy" decoding="async" width="600" height="400" />
+            )}
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- NAV CIRCLES -->
     <section class="nav-circles">
@@ -293,6 +327,113 @@ const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in M
     50% { transform: translateY(8px); }
   }
 
+  /* ── Featured Project ───────────────────────────── */
+  .featured-project {
+    background: var(--bg-page);
+    padding: 3rem 2.5rem;
+    margin: 2rem 0;
+  }
+
+  .featured-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .featured-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tx-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: var(--tx-1);
+  }
+
+  .featured-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--tx-2);
+    margin-bottom: 1rem;
+  }
+
+  .featured-outcome {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--tx-2);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .outcome-check {
+    color: var(--accent);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .featured-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .featured-tags .tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .featured-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--bd-accent);
+    border-radius: 8px;
+    background: var(--accent-bg);
+    transition: all 0.15s;
+  }
+
+  .featured-link:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .featured-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--bd-card);
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   /* ── Nav Circles ────────────────────────────────────── */
   .nav-circles {
     display: flex;
@@ -343,6 +484,15 @@ const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in M
 
   /* ── Responsive ──────────────────────────────────── */
   @media (max-width: 768px) {
+    .featured-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .featured-image {
+      order: -1;
+    }
+
     .hero-split {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -371,6 +521,18 @@ const pageDescription = "Darrell Chew - Data Analyst and Analytics Engineer in M
   }
 
   @media (max-width: 600px) {
+    .featured-project {
+      padding: 2rem 1.25rem;
+    }
+
+    .featured-title {
+      font-size: 1.4rem;
+    }
+
+    .featured-description {
+      font-size: 0.9rem;
+    }
+
     .hero-content h1 {
       font-size: 2.5rem;
     }

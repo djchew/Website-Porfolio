@@ -35,6 +35,14 @@ The scoring model blends five metrics into a 0–100 liveability score:
 
 Each metric is normalized so they contribute equally despite wildly different original scales — crime rates, school indices, and dollar amounts all live on the same 0–100 scale.
 
+**What the data reveals:**
+
+Affordability and liveability are inversely correlated, not aligned. Suburbs scoring highest on affordability—Pakenham South, Narre Warren, Dandenong—often rank poorly on transport and schools. This reveals a fundamental trade-off: you rarely get all five dimensions in one suburb. A retiree willing to trade schools for affordability and safety will have completely different liveability optima than a young family commuting to the CBD.
+
+Inner suburbs (Kew, Hawthorn, Viewbank) show strong fundamentals across all metrics but face median prices above $2M. Growth corridors offer the inverse—genuinely affordable but with lower public transport frequency and school quality. Melbourne's liveability isn't a single curve; it's multiple competing priorities. Only 443 of 673 suburbs have complete price data, revealing how real estate information skews toward established, transactional suburbs—rural and emerging areas are invisible to property databases.
+
+The default 25/25/20/15/15 weighting reflects broad consensus but masks individual life-stage priorities. This is why the slider-based reweighting system matters: it's not about finding the "best" suburb, but letting each person define what liveability means to them.
+
 **The interface:**
 
 Light, modern UI with a clean white theme. Search any suburb and the map jumps to it. Click any suburb on the map to see its overall score and full breakdown across all five categories. A sidebar shows detailed metrics and comparisons. The 673 suburb polygons are colored dynamically — cyan for highly liveable, red for less so — so patterns across the city jump out visually.
@@ -47,8 +55,3 @@ Python FastAPI backend serves the scoring logic and data queries. Next.js React 
 
 Compare neighborhoods before moving. Evaluate suburb potential for property investment. Or just explore what makes some areas of Melbourne more liveable than others. The data is real — Victoria Police crime stats, ACARA school data, PTV transport schedules, OpenStreetMap parks — so the insights are actionable.
 
----
-
-### How I used AI
-
-Claude was instrumental in designing the data architecture and helping me think through the weighting model. I used it for scaffolding the FastAPI backend, building the Next.js map components, and optimizing the spatial queries. The product vision — what metrics matter, how to weight them, what the interface should feel like — was mine. AI accelerated the implementation so I could focus on data quality and user experience.

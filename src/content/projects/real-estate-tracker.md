@@ -42,6 +42,3 @@ There's something satisfying about building a tool with a clear, specific user i
 
 That's who this is for.
 
-### How I used AI
-
-Claude was my pair programmer throughout this project. I used it for scaffolding the frontend components, writing the FastAPI backend, building the database schema, and rapid iteration on UI/UX. The product vision, feature set, and design direction were all mine — AI accelerated the build so I could go from idea to working app quickly.
