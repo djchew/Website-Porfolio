@@ -1,6 +1,6 @@
 ---
 name: Finance Tracking Database
-description: Personal finance tracking system with automated data ingestion, stock price monitoring, analytics dashboards, and investment tracking.
+description: Pull all your finances into one place and spot the patterns spreadsheets hide—where your money goes, what spending really costs you, where lifestyle creep is creeping.
 tags:
   - Python
   - SQL
@@ -25,15 +25,11 @@ seoImage: /images/projects/finance-db/finance_overview.png
 ---
 > **Note:** The financial information shown in this app are fictional and used for demonstration purposes only.
 
-Started this project because I was tired of having my financial life spread across five different apps — my bank's app, a brokerage portal, a crypto exchange, a spreadsheet for budgets, and nothing tying it all together.
+I got tired of checking five different apps to understand my finances. Bank app, brokerage, crypto exchange, spreadsheet for budgets — nothing connected. So I built one database that pulls it all in and lets me ask whatever questions I want.
 
-The idea was simple: one database, everything in it, queried however I want.
+The magic happens when you stop fragmenting your data. Once everything's in one place, patterns emerge. You see where money actually goes, spot lifestyle creep before it spirals, calculate what spending really costs you in opportunity (that daily coffee adds up). Those insights are impossible to see when your data lives in five silos.
 
-The core is a Supabase PostgreSQL database with tables for bank and credit card transactions, stock trades, crypto trades, and daily portfolio snapshots. Python scripts pull CSV exports from my broker and bank, parse them, deduplicate with row hashes, and load them in. Prices get fetched from Yahoo Finance and CoinGecko on a schedule. Everything runs locally — no cloud function, no subscription, no middleman.
+The system centralizes transactions, trades, and holdings into PostgreSQL. Python imports pull from bank and broker CSVs, live price feeds update automatically, and a dashboard re-queries everything on refresh. I recently added multi-user support — your data stays yours, isolated by Postgres row-level security, so I can toggle between real data and a demo dataset for testing.
 
-The dashboard is a FastAPI app serving a single-page HTML dashboard on localhost:7777. It shows net worth, unrealised P&L across stocks and crypto, cash balances, spending by category, budget tracking, and a few "insights" features — opportunity cost, behavioural patterns, lifestyle creep. Refreshing the page re-queries live data.
-
-Recently added multi-user support. The personal data sits under user_id = NULL, accessible only via service role. Web app users get their own UUID and are isolated by Postgres row-level security. Added a login page to the dashboard so I can switch between my real data and a seeded sample user for testing and demo purposes.
-
-It's not pretty from the outside, but it's exactly what I needed.
+It's the same principle big data teams use: the questions you can ask of clean, unified data reveal truths that spreadsheets hide.
 

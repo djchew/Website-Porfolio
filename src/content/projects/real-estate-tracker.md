@@ -1,8 +1,6 @@
 ---
 name: Real Estate Tracker
-description: Full-stack application for tracking real estate listings and
-  portfolio data, with a TypeScript frontend, Python backend, and PostgreSQL
-  database.
+description: Dashboard for landlords who outgrew spreadsheets. Track properties, financials, and lease dates in one place without enterprise software complexity.
 link: https://github.com/djchew/real-estate-tracker
 role: Full-stack developer
 outcomes:
@@ -22,9 +20,9 @@ images:
 seoImage: /images/projects/real-estate-tracker/Dashboard.png
 ---
 > **Note:** The properties shown in this app are fictional and used for demonstration purposes only.
-Started this project with a simple question: why do small landlords still manage their properties in spreadsheets?
+Why do small landlords still manage three properties in spreadsheets? They're big enough to need proper tooling but not big enough to justify enterprise software. That gap is where this lives.
 
-The app is called RealTrack. It's built for Australian property investors who own between two and ten properties — people who are serious enough about real estate to need proper tooling, but not running a large enough operation to justify enterprise software. That gap is where this lives.
+RealTrack is built for Australian property investors with two to ten rentals — the ones serious about real estate but managing everything in Excel. It consolidates properties, lease dates, and financials into one place so you see cap rate, cash-on-cash return, and maintenance costs without digging through spreadsheets.
 
 The stack is Next.js 16 on the frontend with the App Router, TypeScript, and Tailwind CSS. The backend is FastAPI in Python, talking to a Supabase PostgreSQL database. Everything launches from a single terminal command — npm run dev — and closes automatically when you shut the browser. There's a desktop shortcut. No terminal required.
 

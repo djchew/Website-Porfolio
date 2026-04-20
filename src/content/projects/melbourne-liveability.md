@@ -1,6 +1,6 @@
 ---
 name: Melbourne Liveability Index
-description: Interactive web map visualizing and comparing liveability across Greater Melbourne's 673 suburbs across five key dimensions—safety, transport, schools, green space, and housing affordability.
+description: Explore the real trade-offs when choosing where to live—safety, transport, schools, green space, affordability—instead of just looking at prices.
 tags:
   - Python
   - Next.js
@@ -20,9 +20,9 @@ images:
 seoImage: /images/projects/melbourne-liveability/Overview.png
 ---
 
-Started this project because choosing where to live in Melbourne shouldn't be a guessing game. Real estate websites show prices, but they don't tell you whether it's safe, whether you can get to work on public transport, or if your kids would have good schools nearby.
+Choosing where to live is probably the biggest decision you'll make, but real estate sites only show you the price tag. They don't tell you if you'll feel safe walking home at night, whether you can actually get to work without sitting in traffic, or if schools nearby are decent.
 
-The index combines five critical factors into a single liveability score for all 673 suburbs in Greater Melbourne — safety, transport accessibility, school quality, green space, and housing affordability. Users can search, explore the map, and instantly understand which neighborhoods rank highest across each dimension.
+I built this because those trade-offs matter. The index blends five real factors — safety, transport, school quality, green space, and affordability — into a single liveability score for all 673 Melbourne suburbs. It's not about finding the "best" suburb (there isn't one). It's about seeing the actual trade-offs so you can decide what matters to you: Do you want affordability or short commute? Schools or green space? The interactive map lets you explore those choices instead of guessing.
 
 **How it works:**
 
