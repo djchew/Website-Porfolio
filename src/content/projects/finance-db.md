@@ -25,11 +25,9 @@ seoImage: /images/projects/finance-db/finance_overview.png
 ---
 > **Note:** The financial information shown in this app are fictional and used for demonstration purposes only.
 
-I got tired of checking five different apps to understand my finances. Bank app, brokerage, crypto exchange, spreadsheet for budgets — nothing connected. So I built one database that pulls it all in and lets me ask whatever questions I want.
+I was tracking money across ANZ Plus, ING, CMC Invest, Vanguard, and Coinbase, and none of them talked to each other — so I built a self-hosted tracker that pulls it all into one Supabase Postgres database and gives me an actual view of where things stand.
 
-The magic happens when you stop fragmenting your data. Once everything's in one place, patterns emerge. You see where money actually goes, spot lifestyle creep before it spirals, calculate what spending really costs you in opportunity (that daily coffee adds up). Those insights are impossible to see when your data lives in five silos.
+It covers what matters for a DIY investor in Australia: net worth over 1M/3M/6M/1Y windows, per-holding performance with cost basis and P&L, dividend tracking with DRP elections per ticker, and CGT calculations so tax time isn't a scramble through five statements. Transaction categorisation runs on custom rules I've tuned over time, and prices refresh every 15 minutes during market hours so the numbers stay current without me touching anything.
 
-The system centralizes transactions, trades, and holdings into PostgreSQL. Python imports pull from bank and broker CSVs, live price feeds update automatically, and a dashboard re-queries everything on refresh. I recently added multi-user support — your data stays yours, isolated by Postgres row-level security, so I can toggle between real data and a demo dataset for testing.
-
-It's the same principle big data teams use: the questions you can ask of clean, unified data reveal truths that spreadsheets hide.
+The dashboard is split into 11 tabs — overview, investments, spending, transactions, budgeting, portfolio, tax, trade history, watchlists, market ideas, and savings goals — so each part of my finances gets its own space instead of being crammed into one view. Multi-user support runs on Supabase row-level security, which keeps my data isolated and lets me flip between a demo dataset and my real one without exposing either.
 
